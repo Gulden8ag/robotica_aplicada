@@ -1,0 +1,8 @@
+# Resources for class
+
+Link to website template: [Lab Log Template](https://github.com/Gulden8ag/iberoP_Web)
+
+Link to Arithmatex tutorial: [Arithmatex Tutorial](https://facelessuser.github.io/pymdown-extensions/extensions/arithmatex/)
+
+Link to ROS2 Tutorials: [ROS2 TUtoriala](https://docs.ros.org/en/jazzy/Tutorials.html)
+

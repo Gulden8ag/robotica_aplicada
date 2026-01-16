@@ -1,28 +1,34 @@
-site_name: Plantilla para Documentación
+site_name: Applied Robotics (12224)
 markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - md_in_html
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences
   - pymdownx.critic:
       mode: view
   - pymdownx.caret
   - pymdownx.keys
-  - def_list
-  - attr_list
-  - md_in_html
   - pymdownx.blocks.caption
-  - admonition
   - pymdownx.details
   - pymdownx.emoji
   - pymdownx.tabbed:
       alternate_style: true
-  - pymdownx.tasklist:
-      custom_checkbox: true
-      clickable_checkbox: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 # Use the ReadTheDocs theme
 theme:
   name: material
@@ -30,11 +36,34 @@ theme:
   palette:
       - scheme: default
         primary: red
+        toggle:
+          icon: material/weather-night
+          name: Light mode
+      - scheme: slate
+        primary: red
+        toggle:
+          icon: material/weather-sunny
+          name: Dark mode
 
   features:
     - content.code.copy
     - content.tooltips
+    - toc.integrate
+    - navigation.sections
+
 extra_css:
+  - css/extra.css
   - https://use.fontawesome.com/releases/v6.5.2/css/all.css
   - https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css
 
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+plugins:
+  - meta
+  - search
+
+# Validation
+validation:
+  nav:
+    omitted_files: ignore
