@@ -55,10 +55,12 @@ extra_css:
   - css/extra.css
   - https://use.fontawesome.com/releases/v6.5.2/css/all.css
   - https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css
+  - https://pyscript.net/releases/2024.11.1/core.css
 
 extra_javascript:
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://pyscript.net/releases/2024.11.1/core.js
 
 plugins:
   - meta
