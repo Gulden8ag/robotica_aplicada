@@ -1,0 +1,3025 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../T0_3/">
+      
+      
+        <link rel="next" href="../T0_5/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Trajectory Planning Joint-Space - Applied Robotics (12224)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.2/css/all.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+      <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#trajectory-planning-joint-space" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Applied Robotics (12224)" class="md-header__button md-logo" aria-label="Applied Robotics (12224)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Applied Robotics (12224)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Trajectory Planning Joint-Space
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Applied Robotics (12224)" class="md-nav__button md-logo" aria-label="Applied Robotics (12224)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Applied Robotics (12224)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applied Robotics (12224)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course Overview
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Course Overview
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course_Overview/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syllabus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course_Overview/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Example Documentation 
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course_Overview/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources for class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M0 Fundamentals and Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M0 Fundamentals and Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Taxonomies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Degrees of Freedom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration space (C-space) vs Workspace (W-space)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Constraints in Robotics — Holonomic, Non-holonomic, and Pfaffian Form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install and configure ROS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ros2 Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First Program in ROS 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Create a Service Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Create a Service Client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS2 Jazzy — Custom Interface Message
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Custom Service Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Parameters in Python Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Launch Files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M1 Manipulator Kinematics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M1 Manipulator Kinematics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T0_0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spatial Descriptions and Transformations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forward Kinematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inverse kinematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Numerical IK from DH Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RViz2 and TF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    URDF Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T1_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    URDF Joints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M2 Dynamics and Control
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M2 Dynamics and Control
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M2_Dynamics_and_Control/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differential Kinematics and the Jacobian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M2_Dynamics_and_Control/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gazebo + ROS 2 Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M2_Dynamics_and_Control/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gazebo IK Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M3 Trajectory planning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M3 Trajectory planning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning I
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning II: Linear Cartesian Trajectories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning Joint-Space
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning Joint-Space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#steps-at-a-glance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steps at a glance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-node-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 1 — Node Infrastructure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 1 — Node Infrastructure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-add-the-jointstate-import-both" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1 — Add the JointState import [BOTH]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1 — Add the JointState import [BOTH]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-rename-the-node-both" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6 — Rename the node [BOTH]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 6 — Rename the node [BOTH]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#context_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-7-track-the-actual-joint-state-both" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7 — Track the actual joint state [BOTH]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 7 — Track the actual joint state [BOTH]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#context_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-8-add-motion-parameters-both" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 8 — Add motion parameters [BOTH]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 8 — Add motion parameters [BOTH]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#context_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-9-rename-the-busy-flag-both" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 9 — Rename the busy flag [BOTH]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 9 — Rename the busy flag [BOTH]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#context_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-10-register-the-joint-trajectory-service-joint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 10 — Register the joint trajectory service [JOINT]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 10 — Register the joint trajectory service [JOINT]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#context_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-joint-state-callback-step-12-both" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 2 — Joint State Callback (Step 12) [BOTH]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2 — Joint State Callback (Step 12) [BOTH]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#context_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pseudocode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pseudocode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-3-action-client-refactor-steps-15-16-both" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 3 — Action Client Refactor (Steps 15 &amp; 16) [BOTH]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 3 — Action Client Refactor (Steps 15 &amp; 16) [BOTH]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-15-replace-the-single-point-sender-with-_send_trajectory-both" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 15 — Replace the single-point sender with _send_trajectory [BOTH]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 15 — Replace the single-point sender with _send_trajectory [BOTH]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#context_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-ros-2-detail-busy_-flag-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key ROS 2 detail — busy_ flag timing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pseudocode_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pseudocode
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-16-rename-the-action-callbacks-both" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 16 — Rename the action callbacks [BOTH]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-4-trajectory-math-joint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 4 — Trajectory Math [JOINT]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 4 — Trajectory Math [JOINT]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-2-1-d-trapezoidal-speed-profile-joint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2 — 1-D trapezoidal speed profile [JOINT]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 2 — 1-D trapezoidal speed profile [JOINT]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#context_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-concept-trapezoidal-or-triangular" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key concept — trapezoidal or triangular?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-concept-phase-formulas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key concept — phase formulas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pseudocode_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pseudocode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-1-verify-in-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1 — verify in isolation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-synchronized-joint-trajectory-joint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — Synchronized joint trajectory [JOINT]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3 — Synchronized joint trajectory [JOINT]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#context_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-concept-proportional-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key concept — proportional scaling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-concept-time_from_start-in-ros-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key concept — time_from_start in ROS 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pseudocode_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pseudocode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-2-verify-in-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2 — verify in isolation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-5-service-callback-step-13-joint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 5 — Service Callback (Step 13) [JOINT]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 5 — Service Callback (Step 13) [JOINT]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#context_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pseudocode_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pseudocode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-copy-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why .copy() matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-6-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 6 — Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 6 — Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-and-launch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build and launch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confirm-the-service-is-advertised" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confirm the service is advertised
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#call-the-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Call the service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-to-look-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to look for
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning Cartesian Trajectory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning — Homework: Multi-Pose Trajectories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M4 Mobile Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M4 Mobile Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M4_Mobile_Fundamentals/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Kinematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M4_Mobile_Fundamentals/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Navigation with ROS 2 and Nav2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M4_Mobile_Fundamentals/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Simulation with Gazebo and ros2_control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M6 Integration and validation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M6 Integration and validation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M6_Integration_and_validation/T6_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    T6 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M6_Integration_and_validation/T6_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Project Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="trajectory-planning-joint-space">Trajectory Planning Joint-Space</h1>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>In <code>XYZServerGazebo.py</code> the robot receives a target (x, y, z), solves inverse kinematics, and sends a <strong>single waypoint</strong> to the controller. The controller then decides entirely on its own how to get there — how fast, how smooth, when to accelerate. You had no control over any of that.</p>
+<p>In this session you will extend that node into <code>TrajectoryServer.py</code>, which exposes a new service <code>/ee_traj_joint</code>. Instead of sending one waypoint, it sends a <strong>complete sequence of time-stamped waypoints</strong> that form a trapezoidal velocity profile in joint space. The controller simply follows that pre-planned sequence.</p>
+<p>The work divides into two categories:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>What you build</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Node infrastructure</strong></td>
+<td>How the node tracks joint state, registers services, and sends multi-point trajectories</td>
+</tr>
+<tr>
+<td><strong>Trajectory math</strong></td>
+<td>The functions that generate the waypoint sequence from the trapezoidal profile</td>
+</tr>
+</tbody>
+</table>
+<p>Work through the steps in order. Each one builds on the previous.</p>
+<h3 id="steps-at-a-glance">Steps at a glance</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Tag</th>
+<th>What you implement</th>
+<th>Where in file</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>[BOTH]</code></td>
+<td>Add <code>JointState</code> import</td>
+<td>Top of file</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>[JOINT]</code></td>
+<td><code>_trapezoidal_scalar_profile</code> — 1-D speed profile engine</td>
+<td>Section B</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>[JOINT]</code></td>
+<td><code>generate_joint_space_trajectory</code> — synchronized multi-joint waypoints</td>
+<td>Section B</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>[BOTH]</code></td>
+<td>Rename node to <code>"trajectory_server"</code></td>
+<td><code>__init__</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>[BOTH]</code></td>
+<td>Replace <code>q_last_ik_</code> with <code>q_current_</code> + <code>/joint_states</code> subscriber</td>
+<td><code>__init__</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>[BOTH]</code></td>
+<td>Add motion parameters (<code>v_max</code>, <code>a_max</code>, <code>dt_</code>, …)</td>
+<td><code>__init__</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>[BOTH]</code></td>
+<td>Rename <code>motion_in_progress_</code> → <code>busy_</code> everywhere</td>
+<td><code>__init__</code> + callbacks</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>[JOINT]</code></td>
+<td>Register <code>/ee_traj_joint</code> service</td>
+<td><code>__init__</code></td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>[BOTH]</code></td>
+<td><code>_joint_state_cb</code> — map joint names to positions safely</td>
+<td>Subscriber callback</td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>[JOINT]</code></td>
+<td><code>_cb_joint_traj</code> — orchestrate IK → trajectory → send</td>
+<td>Service callback</td>
+</tr>
+<tr>
+<td>15</td>
+<td><code>[BOTH]</code></td>
+<td>Replace single-point sender with <code>_send_trajectory(points)</code></td>
+<td>Action helpers</td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>[BOTH]</code></td>
+<td>Rename action callbacks + swap flag</td>
+<td>Action helpers</td>
+</tr>
+</tbody>
+</table>
+<p>Steps marked <code>[BOTH]</code> are also required for the Cartesian service in Part 3 — you only implement them once.</p>
+<blockquote>
+<p><strong>Note on missing step numbers:</strong> Steps 4, 5, 11, and 14 are not covered in this document. They belong to the Cartesian planner (<code>/ee_traj_cartesian</code>) and are implemented in Part 3. If you see those markers in your code file, skip them for now.</p>
+<p><strong>How to use this document with your code file:</strong>
+Each section references a specific <code># TODO</code> marker in <code>XYZServerGazebo_TODO.py</code> by its step number. Find the marker, read the context here, then implement it.</p>
+</blockquote>
+<hr />
+<h2 id="part-1-node-infrastructure">Part 1 — Node Infrastructure</h2>
+<p>These steps establish the new node structure before touching any trajectory math.</p>
+<hr />
+<h3 id="step-1-add-the-jointstate-import-both">Step 1 — Add the JointState import <code>[BOTH]</code></h3>
+<p>Go to <strong>Step 1</strong> in your code.</p>
+<h4 id="context">Context</h4>
+<p><code>XYZServerGazebo.py</code> never needed to know the robot's actual joint positions. It stored <code>q_last_ik_</code> — the last IK solution — as a starting guess for the next call. This is fragile: if Gazebo is restarted, or someone moves the robot manually, <code>q_last_ik_</code> no longer reflects reality.</p>
+<p>The trajectory server needs the <strong>actual current joint configuration</strong> at the moment a service call arrives, because the planned trajectory must start from wherever the robot physically is right now. ROS 2 broadcasts this on the <code>/joint_states</code> topic using the <code>JointState</code> message type from <code>sensor_msgs</code>.</p>
+<p>Add the import alongside the other message imports at the top of the file.</p>
+<hr />
+<h3 id="step-6-rename-the-node-both">Step 6 — Rename the node <code>[BOTH]</code></h3>
+<p>Go to <strong>Step 6</strong> in your code.</p>
+<h4 id="context_1">Context</h4>
+<p>The node name is what appears in <code>ros2 node list</code> and in every log line. Change the string passed to <code>super().__init__(...)</code> from <code>"move_to_xyz_server"</code> to <code>"trajectory_server"</code>. Nothing else changes — this is purely a naming step, but keeping names consistent with what a node actually does prevents confusion when debugging a running system.</p>
+<hr />
+<h3 id="step-7-track-the-actual-joint-state-both">Step 7 — Track the actual joint state <code>[BOTH]</code></h3>
+<p>Go to <strong>Step 7</strong> in your code.</p>
+<h4 id="context_2">Context</h4>
+<p>You need two things: storage for the current joint positions, and a flag that records whether you have received at least one real measurement. The flag is important because a service call could arrive in the first milliseconds of the node's life, before Gazebo has published any joint states. Without the flag, you would plan a trajectory starting from all zeros — which is almost certainly wrong and could cause a violent jump.</p>
+<p><strong>Delete</strong> <code>self.q_last_ik_</code> and replace it with:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="bp">self</span><span class="o">.</span><span class="n">q_current_</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>   <span class="c1"># updated by /joint_states subscriber</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="bp">self</span><span class="o">.</span><span class="n">q_received_</span> <span class="o">=</span> <span class="kc">False</span>          <span class="c1"># becomes True after the first message arrives</span>
+</span></code></pre></div>
+<p>Then create the ROS 2 subscription. In ROS 2 a subscriber is created inside <code>__init__</code> with <code>create_subscription</code>. The call takes four arguments in this order: the message type, the topic name (as a string), the callback function, and the queue size. Store the subscriber object as <code>self.joint_state_sub_</code> so it is not garbage-collected.</p>
+<hr />
+<h3 id="step-8-add-motion-parameters-both">Step 8 — Add motion parameters <code>[BOTH]</code></h3>
+<p>Go to <strong>Step 8</strong> in your code.</p>
+<h4 id="context_3">Context</h4>
+<p>The trajectory functions you will implement in Part 2 (Steps 2 and 3) need to know speed and timing limits. These are kept as node attributes rather than hardcoded inside the math functions, so you can tune them without touching the trajectory logic.</p>
+<p>Add these six attributes:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="bp">self</span><span class="o">.</span><span class="n">v_max_joint_</span>      <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="mf">30.0</span><span class="p">)</span>   <span class="c1"># maximum joint speed      [rad/s]</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="bp">self</span><span class="o">.</span><span class="n">a_max_joint_</span>      <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="mf">60.0</span><span class="p">)</span>   <span class="c1"># maximum joint acceleration [rad/s²]</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="bp">self</span><span class="o">.</span><span class="n">v_max_cart_</span>       <span class="o">=</span> <span class="mf">0.05</span>               <span class="c1"># reserved for Part 3       [m/s]</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="bp">self</span><span class="o">.</span><span class="n">a_max_cart_</span>       <span class="o">=</span> <span class="mf">0.10</span>               <span class="c1"># reserved for Part 3       [m/s²]</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="bp">self</span><span class="o">.</span><span class="n">dt_</span>               <span class="o">=</span> <span class="mf">0.05</span>               <span class="c1"># control step — 20 Hz      [s]</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="bp">self</span><span class="o">.</span><span class="n">lambda_damp_cart_</span> <span class="o">=</span> <span class="mf">1e-4</span>               <span class="c1"># reserved for Part 3</span>
+</span></code></pre></div>
+<p><code>dt_</code> is the interval between consecutive waypoints. At 20 Hz and a 3-second motion, the controller receives 60 waypoints instead of 1. Finer <code>dt_</code> means smoother execution but a larger message.</p>
+<hr />
+<h3 id="step-9-rename-the-busy-flag-both">Step 9 — Rename the busy flag <code>[BOTH]</code></h3>
+<p>Go to <strong>Step 9</strong> in your code.</p>
+<h4 id="context_4">Context</h4>
+<p>Replace every occurrence of <code>self.motion_in_progress_</code> with <code>self.busy_</code>. The logic is identical — a boolean that prevents two service requests from overlapping. This is a naming-only change, but it must be applied consistently everywhere the flag is read or written: in <code>__init__</code>, in the service callbacks, and in the action response handlers you will update in Step 16.</p>
+<hr />
+<h3 id="step-10-register-the-joint-trajectory-service-joint">Step 10 — Register the joint trajectory service <code>[JOINT]</code></h3>
+<p>Go to <strong>Step 10</strong> in your code.</p>
+<h4 id="context_5">Context</h4>
+<p>This is the ROS 2 call that advertises <code>/ee_traj_joint</code> on the network. It follows exactly the same pattern as the existing <code>/ee_pose</code> service in the node: <code>create_service</code> takes the service type, the service name as a string, and the callback. Store the result as <code>self.srv_joint_</code>.</p>
+<p>The callback (<code>self._cb_joint_traj</code>) does not exist yet — you will implement it in Step 13. The node will still start correctly; the service will simply crash if called before Step 13 is implemented.</p>
+<p>You may keep the original <code>/ee_pose</code> service alongside for comparison while testing.</p>
+<hr />
+<h2 id="part-2-joint-state-callback-step-12-both">Part 2 — Joint State Callback (Step 12) <code>[BOTH]</code></h2>
+<p>Go to <strong>Step 12</strong> in your code. Implement <code>_joint_state_cb(self, msg: JointState)</code>.</p>
+<h3 id="context_6">Context</h3>
+<p>Every time <code>/joint_states</code> publishes, this callback fires and updates <code>self.q_current_</code>. The critical detail is that <code>/joint_states</code> lists joints in an order that is <strong>not guaranteed</strong> to match your <code>self.joint_names_</code> order. The controller may list joints alphabetically, while your trajectory code expects them in kinematic chain order. Reading <code>msg.position</code> by index directly would silently place the wrong angle into the wrong joint — a bug that is very hard to spot visually.</p>
+<p>The correct approach is to build a dictionary mapping each joint name to its index in the message, then use <code>self.joint_names_</code> to extract values in the right order.</p>
+<h3 id="pseudocode">Pseudocode</h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>def _joint_state_cb(self, msg):
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    # Build a lookup table: joint name → its index in msg.position
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    # msg.name is a list of strings, msg.position is a parallel list of floats
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    # This can be done in one line using enumerate
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    name_to_idx = { ... }
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    # For each joint we care about, find it in the message by name
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    for j, joint_name in enumerate(self.joint_names_):
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        if joint_name exists in name_to_idx:
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>            # Use the lookup to find the right index in msg.position
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>            self.q_current_[j] = msg.position[ name_to_idx[joint_name] ]
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    # Signal that we have received at least one valid measurement
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    self.q_received_ = True
+</span></code></pre></div>
+<h3 id="verify">Verify</h3>
+<p>After implementing, launch Gazebo and the node. Run:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/joint_states<span class="w"> </span>--once
+</span></code></pre></div>
+<p>Check that the joint names in the message match those in <code>self.joint_names_</code>. Then temporarily add <code>self.get_logger().info(str(self.q_current_))</code> inside the callback to confirm values update as the robot moves. Remove the log line before final testing.</p>
+<hr />
+<h2 id="part-3-action-client-refactor-steps-15-16-both">Part 3 — Action Client Refactor (Steps 15 &amp; 16) <code>[BOTH]</code></h2>
+<hr />
+<h3 id="step-15-replace-the-single-point-sender-with-_send_trajectory-both">Step 15 — Replace the single-point sender with <code>_send_trajectory</code> <code>[BOTH]</code></h3>
+<p>Go to <strong>Step 15</strong> in your code.</p>
+<h4 id="context_7">Context</h4>
+<p>The original <code>send_trajectory_goal()</code> receives a flat list of joint angles plus a duration, then manually constructs a single <code>JointTrajectoryPoint</code>. The new <code>_send_trajectory(self, points)</code> receives an already-built list of <code>JointTrajectoryPoint</code> objects and sends them all at once.</p>
+<p>This difference is fundamental: sending a full sequence means the controller follows the pre-planned trapezoidal profile exactly, waypoint by waypoint, at the times you specified. Sending a single endpoint means the controller uses its own internal interpolation — which ignores your speed and acceleration design.</p>
+<h4 id="key-ros-2-detail-busy_-flag-timing">Key ROS 2 detail — <code>busy_</code> flag timing</h4>
+<p>Set <code>self.busy_ = True</code> <strong>before</strong> calling <code>send_goal_async</code>, not after. There is a brief window between the send and any subsequent line where a second service call could arrive and pass the guard check. Setting the flag before the send eliminates that window.</p>
+<h4 id="pseudocode_1">Pseudocode</h4>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>def _send_trajectory(self, points):
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    # Wait up to 3 seconds for the action server to come up
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    # If it does not respond, log an error and return False
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    if not self.traj_client_.wait_for_server(timeout_sec=3.0):
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        ...
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        return False
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    # Build the goal message
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    goal = FollowJointTrajectory.Goal()
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    goal.trajectory.joint_names = self.joint_names_
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    goal.trajectory.points      = points     # the complete list, not just one point
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    # Set the flag BEFORE sending (see explanation above)
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    self.busy_ = True
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>    # Non-blocking send — the callback fires when the controller responds
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>    future = self.traj_client_.send_goal_async(goal)
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    future.add_done_callback(self._goal_response_cb)
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>    return True
+</span></code></pre></div>
+<hr />
+<h3 id="step-16-rename-the-action-callbacks-both">Step 16 — Rename the action callbacks <code>[BOTH]</code></h3>
+<p>Go to <strong>Step 16</strong> in your code.</p>
+<p>Rename:
+- <code>goal_response_callback</code> → <code>_goal_response_cb</code>
+- <code>result_callback</code> → <code>_result_cb</code></p>
+<p>Replace every <code>self.motion_in_progress_</code> inside both with <code>self.busy_</code>. The logic is unchanged — <code>_goal_response_cb</code> clears the flag if the goal is rejected, and <code>_result_cb</code> clears it when execution finishes.</p>
+<hr />
+<h2 id="part-4-trajectory-math-joint">Part 4 — Trajectory Math <code>[JOINT]</code></h2>
+<p>This is the mathematical core of the session. Steps 2 and 3 are defined above the node class in your file.</p>
+<blockquote>
+<p><strong>File navigation:</strong> scroll back up to <strong>Section B</strong> in your Python file — it sits between the kinematics helpers and the node class definition. You will be working there for this entire part, then scrolling back down to the node class for Part 5.</p>
+</blockquote>
+<p>Read the full context for each step before writing any code.</p>
+<hr />
+<h3 id="step-2-1-d-trapezoidal-speed-profile-joint">Step 2 — 1-D trapezoidal speed profile <code>[JOINT]</code></h3>
+<p>Go to <strong>Step 2</strong> in your code. Implement <code>_trapezoidal_scalar_profile(total_disp, v_max, a_max, dt)</code>.</p>
+<h4 id="context_8">Context</h4>
+<p>This function takes a single positive displacement — the displacement of the largest-moving joint in the motion — and returns three arrays describing how that displacement is covered over time:</p>
+<ul>
+<li><code>lam</code> — distance traveled so far at each sample</li>
+<li><code>lam_dot</code> — instantaneous speed at each sample</li>
+<li><code>times</code> — the time axis</li>
+</ul>
+<p>It knows nothing about joints, ROS 2, or the robot. It is pure kinematics. Step 3 calls it once and scales all joints from its output.</p>
+<blockquote>
+<p><strong>Assumption:</strong> this function always receives <code>total_disp &gt; 0</code>. The zero-displacement edge case is handled one level up in Step 3 (<code>max_disp &lt; 1e-6</code> guard) before this function is ever called. Do not add a zero-check here — test it with positive values only.</p>
+</blockquote>
+<h4 id="key-concept-trapezoidal-or-triangular">Key concept — trapezoidal or triangular?</h4>
+<p>The first question to answer is whether there is enough distance to reach <code>v_max</code>. A single ramp from 0 to <code>v_max</code> covers:</p>
+<div class="arithmatex">\[d_{ramp} = \frac{v_{max}^2}{2 \cdot a_{max}}\]</div>
+<p>The full motion requires two ramps (up and down), consuming <span class="arithmatex">\(2 \cdot d_{ramp}\)</span>. Compare this to <code>total_disp</code>:</p>
+<ul>
+<li><span class="arithmatex">\(total\_disp \geq 2 \cdot d_{ramp}\)</span> → <strong>Trapezoidal</strong>: the robot reaches <code>v_max</code> and cruises at constant speed.</li>
+<li><span class="arithmatex">\(total\_disp &lt; 2 \cdot d_{ramp}\)</span> → <strong>Triangular</strong>: the robot cannot reach <code>v_max</code>. The motion peaks at a lower speed that must be derived from the area constraint.</li>
+</ul>
+<p>In the triangular case, the area of the triangular velocity profile must equal <code>total_disp</code>. Since there is no cruise phase (<span class="arithmatex">\(t_c = 0\)</span>) and both ramps are symmetric:</p>
+<div class="arithmatex">\[\frac{1}{2} \cdot (2 t_a) \cdot v_{peak} = total\_disp \implies v_{peak} = \sqrt{a_{max} \cdot total\_disp}\]</div>
+<p>This <strong>overwrites <code>v_max</code> locally</strong> inside the function. The requested maximum speed is simply not achievable given the available distance — the function silently uses the physically correct peak instead.</p>
+<h4 id="key-concept-phase-formulas">Key concept — phase formulas</h4>
+<p>Once you have <code>t_a</code> and <code>t_c</code>, sample the profile at <span class="arithmatex">\(N+1\)</span> equally spaced instants in <span class="arithmatex">\([0, T]\)</span> where <span class="arithmatex">\(T = 2 t_a + t_c\)</span>. Use <code>np.ceil(T / dt)</code> for <span class="arithmatex">\(N\)</span>.</p>
+<p>For each sample, the position traveled <code>lam[k]</code> and the instantaneous speed <code>lam_dot[k]</code> depend on which phase the sample falls in:</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Condition</th>
+<th><code>lam[k]</code></th>
+<th><code>lam_dot[k]</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Acceleration</td>
+<td><span class="arithmatex">\(t \leq t_a\)</span></td>
+<td><span class="arithmatex">\(\dfrac{1}{2} a_{max} \cdot t^2\)</span></td>
+<td><span class="arithmatex">\(a_{max} \cdot t\)</span></td>
+</tr>
+<tr>
+<td>Cruise</td>
+<td><span class="arithmatex">\(t_a &lt; t \leq t_a + t_c\)</span></td>
+<td><span class="arithmatex">\(d_{ramp} + v_{max}(t - t_a)\)</span></td>
+<td><span class="arithmatex">\(v_{max}\)</span></td>
+</tr>
+<tr>
+<td>Deceleration</td>
+<td><span class="arithmatex">\(t &gt; t_a + t_c\)</span></td>
+<td><span class="arithmatex">\(d_{ramp} + v_{max} \cdot t_c + v_{max}\Delta t_d - \dfrac{1}{2}a_{max}\Delta t_d^2\)</span></td>
+<td><span class="arithmatex">\(v_{max} - a_{max} \cdot \Delta t_d\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>where <span class="arithmatex">\(\Delta t_d = t - t_a - t_c\)</span> is the time elapsed since deceleration began.</p>
+<h4 id="pseudocode_2">Pseudocode</h4>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>def _trapezoidal_scalar_profile(total_disp, v_max, a_max, dt):
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    # ── Decision: trapezoidal or triangular? ──────────────────────────
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    # How much distance does a single ramp consume?
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    d_ramp = ...
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    if total_disp is large enough to fit two complete ramps:
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        # TRAPEZOIDAL
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        # How long is one ramp?
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        t_a = ...
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        # After removing both ramps, how much distance remains for cruising?
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        # How long does it take to cover that distance at v_max?
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        t_c = ...
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    else:
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>        # TRIANGULAR — v_max is not reachable for this displacement
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>        # Overwrite v_max with the actual achievable peak (see formula above)
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>        v_max = ...
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>        # Ramp time using the new reduced peak
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>        t_a   = ...
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>        # No cruise phase
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>        t_c   = 0.0
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>    # ── Build the time axis ───────────────────────────────────────────
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>    T     = ...                  # total motion duration
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>    N     = max(1, int(...))     # number of intervals — use np.ceil
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>    times = np.linspace(0.0, T, N + 1)
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>    lam     = np.zeros(N + 1)
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>    lam_dot = np.zeros(N + 1)
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>    # ── Sample the profile ────────────────────────────────────────────
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>    for k, t in enumerate(times):
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>        if t &lt;= t_a:
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>            # Acceleration phase
+</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>            # Velocity is a linearly increasing ramp starting at 0
+</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>            # Position is the integral of that ramp
+</span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a>            lam[k]     = ...
+</span><span id="__span-5-40"><a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>            lam_dot[k] = ...
+</span><span id="__span-5-41"><a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a>
+</span><span id="__span-5-42"><a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a>        elif t &lt;= t_a + t_c:
+</span><span id="__span-5-43"><a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a>            # Cruise phase
+</span><span id="__span-5-44"><a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a>            # Velocity is constant; position picks up from where the ramp ended
+</span><span id="__span-5-45"><a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a>            lam[k]     = ...
+</span><span id="__span-5-46"><a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a>            lam_dot[k] = ...
+</span><span id="__span-5-47"><a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a>
+</span><span id="__span-5-48"><a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a>        else:
+</span><span id="__span-5-49"><a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a>            # Deceleration phase — how far into deceleration are we?
+</span><span id="__span-5-50"><a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a>            dt_d = t - t_a - t_c
+</span><span id="__span-5-51"><a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a>            # Velocity decreases linearly back to 0
+</span><span id="__span-5-52"><a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a>            # Position continues from end of cruise, slowing down
+</span><span id="__span-5-53"><a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a>            lam[k]     = ...
+</span><span id="__span-5-54"><a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a>            lam_dot[k] = ...
+</span><span id="__span-5-55"><a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a>
+</span><span id="__span-5-56"><a id="__codelineno-5-56" name="__codelineno-5-56" href="#__codelineno-5-56"></a>    return lam, lam_dot, times
+</span></code></pre></div>
+<h4 id="exercise-1-verify-in-isolation">Exercise 1 — verify in isolation</h4>
+<p>Test your function in a <strong>standalone Python script</strong> before connecting it to ROS 2. Run:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">lam</span><span class="p">,</span> <span class="n">lam_dot</span><span class="p">,</span> <span class="n">times</span> <span class="o">=</span> <span class="n">_trapezoidal_scalar_profile</span><span class="p">(</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">total_disp</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">v_max</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">a_max</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.05</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">)</span>
+</span></code></pre></div>
+<p>Answer the following before printing anything:</p>
+<p><strong>a)</strong> Compute <span class="arithmatex">\(d_{ramp}\)</span> by hand. Is this case trapezoidal or triangular?</p>
+<p><strong>b)</strong> What must <code>lam[-1]</code> equal, and why? (Think about what <code>lam</code> represents physically.)</p>
+<p><strong>c)</strong> What must <code>lam_dot[0]</code> equal? What must <code>lam_dot[-1]</code> equal?</p>
+<p><strong>d)</strong> Print <code>lam[-1]</code>. If it does not match your answer to (b), the deceleration phase formula has a mistake.</p>
+<p>Now call the function again with <code>total_disp=0.1</code>. Which case does this trigger? What value of <code>v_max</code> does your function actually use internally? Print it to verify.</p>
+<hr />
+<h3 id="step-3-synchronized-joint-trajectory-joint">Step 3 — Synchronized joint trajectory <code>[JOINT]</code></h3>
+<p>Go to <strong>Step 3</strong> in your code. Implement <code>generate_joint_space_trajectory(q_start, q_end, v_max, a_max, dt)</code>.</p>
+<h4 id="context_9">Context</h4>
+<p>This function takes start and end joint configurations and returns a list of <code>JointTrajectoryPoint</code> objects — the exact format that <code>FollowJointTrajectory</code> expects. It calls <code>_trapezoidal_scalar_profile</code> to get the time law, then applies it to every joint simultaneously.</p>
+<p>The key insight is <strong>synchronization</strong>: all joints must start and finish at exactly the same time. A joint moving 0.1 rad and a joint moving 1.5 rad cannot each use their own independent profile — the slow joint would arrive long before the fast one, producing a curved, uncontrolled path.</p>
+<p>The solution is to build the profile only for the <strong>leader joint</strong> — the one with the largest displacement — and scale every other joint proportionally. If the leader has covered a fraction <span class="arithmatex">\(f\)</span> of its total travel at time step <span class="arithmatex">\(k\)</span>, then every other joint must also have covered exactly the fraction <span class="arithmatex">\(f\)</span> of its own total travel.</p>
+<h4 id="key-concept-proportional-scaling">Key concept — proportional scaling</h4>
+<p>Define:</p>
+<div class="arithmatex">\[\delta q = q_{end} - q_{start}, \qquad max\_disp = \max(|\delta q|)\]</div>
+<p>The scalar profile gives a normalized progress signal: <span class="arithmatex">\(lam[k] / max\_disp \in [0, 1]\)</span>.</p>
+<p>At each sample <span class="arithmatex">\(k\)</span>, the position and velocity of <strong>all joints</strong> are:</p>
+<div class="arithmatex">\[q_k = q_{start} + \delta q \cdot \frac{lam[k]}{max\_disp}\]</div>
+<div class="arithmatex">\[\dot{q}_k = \delta q \cdot \frac{\dot{lam}[k]}{max\_disp}\]</div>
+<p>The division by <span class="arithmatex">\(max\_disp\)</span> rescales the profile to <span class="arithmatex">\([0, 1]\)</span>. Multiplying by <span class="arithmatex">\(\delta q\)</span> stretches it back to each joint's own range. Joints with small <span class="arithmatex">\(\delta q_i\)</span> naturally move slowly; the leader moves at the full profile speed.</p>
+<h4 id="key-concept-time_from_start-in-ros-2">Key concept — <code>time_from_start</code> in ROS 2</h4>
+<p>Each <code>JointTrajectoryPoint</code> must tell the controller <strong>when</strong> to reach that configuration. This is the <code>time_from_start</code> field — a ROS 2 <code>Duration</code> with two separate integer fields: <code>sec</code> and <code>nanosec</code>. It is not a single float.</p>
+<p>To convert a float time <span class="arithmatex">\(t\)</span> in seconds:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">pt</span><span class="o">.</span><span class="n">time_from_start</span><span class="o">.</span><span class="n">sec</span>    <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">pt</span><span class="o">.</span><span class="n">time_from_start</span><span class="o">.</span><span class="n">nanosec</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1e9</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Getting this wrong is one of the most common bugs in this step. If <code>nanosec</code> accidentally exceeds <span class="arithmatex">\(10^9\)</span>, the duration is invalid and the controller will reject the goal.</p>
+<h4 id="pseudocode_3">Pseudocode</h4>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>def generate_joint_space_trajectory(q_start, q_end, v_max, a_max, dt):
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    delta_q  = q_end - q_start
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    max_disp = max(abs(delta_q))   # leader joint displacement
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    # Edge case: robot is already at the target
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    if max_disp &lt; 1e-6:
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        # Return a single hold-point at q_start, velocity zero
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>        # time_from_start should be dt (not zero — some controllers reject t=0)
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>        pt = JointTrajectoryPoint()
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>        pt.positions  = list(q_start)
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>        pt.velocities = [0.0] * len(q_start)
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>        pt.time_from_start.sec    = 0
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        pt.time_from_start.nanosec = int(dt * 1e9)
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>        return [pt]
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>    # Build the 1-D profile for the leader joint
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>    lam, lam_dot, times = _trapezoidal_scalar_profile(max_disp, v_max, a_max, dt)
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>    points = []
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>    for k in range(len(times)):
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>        # Scale profile to all joints proportionally (see formula above)
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>        q_k    = ...   # shape: (6,)
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>        qdot_k = ...   # shape: (6,)
+</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a>
+</span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>        pt = JointTrajectoryPoint()
+</span><span id="__span-8-28"><a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a>        pt.positions  = list(q_k)
+</span><span id="__span-8-29"><a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>        pt.velocities = list(qdot_k)
+</span><span id="__span-8-30"><a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a>
+</span><span id="__span-8-31"><a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>        # Convert float time to ROS 2 Duration — split seconds and nanoseconds
+</span><span id="__span-8-32"><a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a>        t_k = times[k]
+</span><span id="__span-8-33"><a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a>        pt.time_from_start.sec    = ...
+</span><span id="__span-8-34"><a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a>        pt.time_from_start.nanosec = ...
+</span><span id="__span-8-35"><a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a>
+</span><span id="__span-8-36"><a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a>        points.append(pt)
+</span><span id="__span-8-37"><a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a>
+</span><span id="__span-8-38"><a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a>    return points
+</span></code></pre></div>
+<h4 id="exercise-2-verify-in-isolation">Exercise 2 — verify in isolation</h4>
+<p>Test this function in a <strong>standalone Python script</strong>, not inside ROS 2. Use:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">q_start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">q_end</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">points</span> <span class="o">=</span> <span class="n">generate_joint_space_trajectory</span><span class="p">(</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">q_start</span><span class="p">,</span> <span class="n">q_end</span><span class="p">,</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">v_max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="mf">30.0</span><span class="p">),</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">a_max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="mf">60.0</span><span class="p">),</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="n">dt</span><span class="o">=</span><span class="mf">0.05</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="p">)</span>
+</span></code></pre></div>
+<p>Answer these before inspecting the output:</p>
+<p><strong>a)</strong> Which joint is the leader? What is <code>max_disp</code> in radians?</p>
+<p><strong>b)</strong> Compute <span class="arithmatex">\(T\)</span> for the leader by hand. How many waypoints do you expect approximately?</p>
+<p><strong>c)</strong> What should <code>points[0].positions</code> equal?</p>
+<p><strong>d)</strong> What should <code>points[-1].positions</code> equal? Check it.</p>
+<p><strong>e)</strong> Is <code>points[-1].time_from_start.sec</code> an integer or a float? What happens in the controller if <code>nanosec</code> is set to a value larger than <span class="arithmatex">\(10^9\)</span>?</p>
+<p><strong>f)</strong> Reconstruct the velocity profile for joint 0 by extracting <code>p.velocities[0]</code> from every point and plotting it against time. Does it look like a trapezoid (or triangle)?</p>
+<hr />
+<h2 id="part-5-service-callback-step-13-joint">Part 5 — Service Callback (Step 13) <code>[JOINT]</code></h2>
+<p>Go to <strong>Step 13</strong> in your code. Implement <code>_cb_joint_traj(self, request, response)</code>.</p>
+<h3 id="context_10">Context</h3>
+<p>This callback is the entry point for <code>/ee_traj_joint</code>. It orchestrates everything you have built: it checks the robot is ready, reads the current joint state, solves IK for the target, generates the trajectory, and sends it to the controller.</p>
+<p>Failures at any stage must be caught and reported via the <code>response</code> object — not silently, and not by crashing. A service callback that raises an unhandled exception will kill the entire node.</p>
+<h3 id="pseudocode_4">Pseudocode</h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>def _cb_joint_traj(self, request, response):
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    # ── Guard 1: reject if already moving ────────────────────────────
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    if self.busy_:
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        response.success = False
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>        response.message = &quot;Motion already in progress. Wait until it finishes.&quot;
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        return response
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    # ── Guard 2: reject if joint state not yet available ─────────────
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    if not self.q_received_:
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>        response.success = False
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>        response.message = &quot;Joint states not yet received. Is Gazebo running?&quot;
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>        return response
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>    # ── Read the target and take a snapshot of the current state ─────
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>    p_des   = np.array([request.x, request.y, request.z])
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>    # Take a copy — do not use self.q_current_ directly below this line
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>    # (the subscriber can update it at any moment in the background)
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>    q_start = self.q_current_.copy()
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>    # ── Solve IK from the current configuration ───────────────────────
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>    # Use ik_lm — it returns (q_solution, converged_bool)
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>    q_end, ok = ik_lm(p_des, q_start, self.dh_table_, self.qmin_, self.qmax_)
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>    if not ok:
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>        response.success = False
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>        response.message = &quot;IK did not converge. Check that the target is reachable.&quot;
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>        return response
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>    # Optional but recommended: log the FK check
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>    # fk_position(q_end, self.dh_table_) should be close to p_des
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>    # Log both values so you can inspect the IK accuracy
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>    # ── Generate the joint-space trajectory ──────────────────────────
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>    points = generate_joint_space_trajectory(
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>        q_start, q_end,
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>        self.v_max_joint_, self.a_max_joint_, self.dt_
+</span><span id="__span-10-37"><a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>    )
+</span><span id="__span-10-38"><a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>    # Log: how many waypoints were generated, what the estimated duration is
+</span><span id="__span-10-39"><a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>    # duration = last point&#39;s time_from_start in seconds
+</span><span id="__span-10-40"><a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>
+</span><span id="__span-10-41"><a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>    # ── Send to the action server ─────────────────────────────────────
+</span><span id="__span-10-42"><a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>    ok_sent = self._send_trajectory(points)
+</span><span id="__span-10-43"><a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a>
+</span><span id="__span-10-44"><a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>    # ── Build the response ────────────────────────────────────────────
+</span><span id="__span-10-45"><a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a>    response.success = ok_sent
+</span><span id="__span-10-46"><a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>    if ok_sent:
+</span><span id="__span-10-47"><a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a>        response.message = ... # include waypoint count and duration
+</span><span id="__span-10-48"><a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>    else:
+</span><span id="__span-10-49"><a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a>        response.message = &quot;Failed to send trajectory goal.&quot;
+</span><span id="__span-10-50"><a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a>    return response
+</span></code></pre></div>
+<h3 id="why-copy-matters">Why <code>.copy()</code> matters</h3>
+<p><code>self.q_current_</code> is written by <code>_joint_state_cb</code>, which runs whenever <code>/joint_states</code> publishes — potentially every few milliseconds. If you pass <code>self.q_current_</code> directly into <code>ik_lm</code>, the subscriber could update it mid-computation and the solver would see a changing starting point. Calling <code>.copy()</code> immediately freezes a stable snapshot for the entire planning phase.</p>
+<hr />
+<h2 id="part-6-testing">Part 6 — Testing</h2>
+<p>Once all steps are implemented, test end to end.</p>
+<h3 id="build-and-launch">Build and launch</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>inverse_kin
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">source</span><span class="w"> </span>install/setup.bash
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>ros2<span class="w"> </span>launch<span class="w"> </span>myrobot_bringup<span class="w"> </span>ros_gazebo.launch.xml
+</span></code></pre></div>
+<h3 id="confirm-the-service-is-advertised">Confirm the service is advertised</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ros2<span class="w"> </span>service<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>traj
+</span></code></pre></div>
+<p>You should see <code>/ee_traj_joint</code> in the output.</p>
+<h3 id="call-the-service">Call the service</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/ee_traj_joint<span class="w"> </span>my_robot_interfaces/srv/EEpose<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="s2">&quot;{x: 0.3, y: 0.2, z: 0.5}&quot;</span>
+</span></code></pre></div>
+<h3 id="what-to-look-for">What to look for</h3>
+<ul>
+<li>Response shows <code>success: True</code> with a message containing waypoint count and duration.</li>
+<li>Node logs show: IK convergence, FK verification, waypoint count.</li>
+<li>In Gazebo: the robot moves <strong>smoothly</strong>, accelerating and decelerating visibly, rather than jumping to the target.</li>
+<li>Call the old <code>/ee_pose</code> service with the same target and compare the motion. The difference should be clear.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.tooltips", "toc.integrate", "navigation.sections"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+      
+    
+  </body>
+</html>

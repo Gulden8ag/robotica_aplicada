@@ -1,0 +1,3090 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../T0_1/">
+      
+      
+        <link rel="next" href="../T0_3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Trajectory Planning II: Linear Cartesian Trajectories - Applied Robotics (12224)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.2/css/all.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+      <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#trajectory-planning-ii-linear-cartesian-trajectories" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Applied Robotics (12224)" class="md-header__button md-logo" aria-label="Applied Robotics (12224)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Applied Robotics (12224)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Trajectory Planning II: Linear Cartesian Trajectories
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Applied Robotics (12224)" class="md-nav__button md-logo" aria-label="Applied Robotics (12224)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Applied Robotics (12224)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applied Robotics (12224)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course Overview
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Course Overview
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course_Overview/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syllabus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course_Overview/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Example Documentation 
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course_Overview/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources for class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M0 Fundamentals and Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M0 Fundamentals and Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Taxonomies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Degrees of Freedom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration space (C-space) vs Workspace (W-space)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Constraints in Robotics — Holonomic, Non-holonomic, and Pfaffian Form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install and configure ROS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ros2 Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First Program in ROS 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Create a Service Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Create a Service Client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS2 Jazzy — Custom Interface Message
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Custom Service Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Parameters in Python Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Launch Files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M1 Manipulator Kinematics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M1 Manipulator Kinematics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T0_0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spatial Descriptions and Transformations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forward Kinematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inverse kinematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Numerical IK from DH Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RViz2 and TF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    URDF Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T1_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    URDF Joints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M2 Dynamics and Control
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M2 Dynamics and Control
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M2_Dynamics_and_Control/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differential Kinematics and the Jacobian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M2_Dynamics_and_Control/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gazebo + ROS 2 Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M2_Dynamics_and_Control/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gazebo IK Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M3 Trajectory planning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M3 Trajectory planning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning I
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning II: Linear Cartesian Trajectories
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning II: Linear Cartesian Trajectories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-from-joint-motion-to-cartesian-motion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. From joint motion to Cartesian motion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-what-linear-trajectory-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. What "linear trajectory" means
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-adding-timing-from-path-to-trajectory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Adding timing: from path to trajectory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-geometric-setup-direction-and-distance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. Geometric setup: direction and distance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="24. Geometric setup: direction and distance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-path-length" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.1 Path length
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-unit-direction-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.2 Unit direction vector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243-python-computing-path-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.3 Python — computing path geometry
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-distance-traveled-along-the-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. Distance traveled along the line
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-scalar-speed-along-the-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26. Scalar speed along the line
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="26. Scalar speed along the line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#261-constant-linear-speed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26.1 Constant linear speed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#262-trapezoidal-linear-speed-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26.2 Trapezoidal linear speed profile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#263-python-trapezoidal-speed-profile-for-a-cartesian-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26.3 Python — trapezoidal speed profile for a Cartesian line
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-cartesian-velocity-along-a-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        27. Cartesian velocity along a line
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-straight-in-cartesian-straight-in-joint-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        28. Straight in Cartesian ≠ straight in joint space
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-converting-cartesian-velocity-to-joint-velocity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        29. Converting Cartesian velocity to joint velocity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="29. Converting Cartesian velocity to joint velocity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#291-python-computing-joint-velocities-from-cartesian-velocity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        29.1 Python — computing joint velocities from Cartesian velocity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-full-procedure-for-linear-trajectory-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30. Full procedure for linear trajectory generation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="30. Full procedure for linear trajectory generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-define-the-initial-and-final-cartesian-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1. Define the initial and final Cartesian points
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-compute-the-line-direction-and-path-length" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2. Compute the line direction and path length
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-choose-a-scalar-speed-law-along-the-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3. Choose a scalar speed law along the path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-compute-the-desired-cartesian-velocity-at-each-time-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4. Compute the desired Cartesian velocity at each time step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-convert-cartesian-velocity-into-joint-velocity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5. Convert Cartesian velocity into joint velocity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-integrate-joint-velocity-to-obtain-joint-trajectory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6. Integrate joint velocity to obtain joint trajectory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-7-verify-the-cartesian-path-with-forward-kinematics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7. Verify the Cartesian path with forward kinematics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-worked-numerical-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31. Worked numerical example
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="31. Worked numerical example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-path-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1. Path geometry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-desired-cartesian-velocity-constant-speed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2. Desired Cartesian velocity (constant speed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-first-iteration-building-the-geometric-jacobian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3. First iteration — building the geometric Jacobian
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-invert-the-jacobian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4. Invert the Jacobian
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-compute-joint-velocities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5. Compute joint velocities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-update-joint-positions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6. Update joint positions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-7-verify-with-forward-kinematics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7. Verify with forward kinematics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-8-repeat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 8. Repeat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#311-python-full-trajectory-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31.1 Python — full trajectory loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-python-trapezoidal-speed-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31.2 Python — trapezoidal speed version
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-the-velocity-based-approach-what-it-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        32. The velocity-based approach: what it means
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-main-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33. Main limitations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33. Main limitations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-singularity-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1 Singularity risk
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-joint-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2 Joint limits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-numerical-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.3 Numerical drift
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-orientation-not-yet-controlled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.4 Orientation not yet controlled
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        37. Exercises
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="37. Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 6
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 7
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 8
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 9
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 10
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 11
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning Joint-Space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning Cartesian Trajectory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning — Homework: Multi-Pose Trajectories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M4 Mobile Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M4 Mobile Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M4_Mobile_Fundamentals/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Kinematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M4_Mobile_Fundamentals/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Navigation with ROS 2 and Nav2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M4_Mobile_Fundamentals/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Simulation with Gazebo and ros2_control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M6 Integration and validation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M6 Integration and validation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M6_Integration_and_validation/T6_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    T6 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M6_Integration_and_validation/T6_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Project Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="trajectory-planning-ii-linear-cartesian-trajectories">Trajectory Planning II: Linear Cartesian Trajectories</h1>
+<h2 id="21-from-joint-motion-to-cartesian-motion">21. From joint motion to Cartesian motion</h2>
+<p>In Lecture 1, we discussed trajectory generation from the point of view of a single joint variable <span class="arithmatex">\(q(t)\)</span>. That is the most direct way to understand ramps, velocity profiles, and acceleration limits.</p>
+<p>However, in many practical tasks we do not want to say "joint 1 must move by this angle." Instead, we want to say:</p>
+<ul>
+<li>"the end-effector must move in a straight line,"</li>
+<li>"the tool must go from point A to point B at a controlled linear speed."</li>
+</ul>
+<p>This is called a <strong>linear Cartesian trajectory</strong>: the end-effector position follows a straight segment in task space.</p>
+<p><img alt="cartesian line" src="../images/task_space.png" width="80%" /></p>
+<hr />
+<h2 id="22-what-linear-trajectory-means">22. What "linear trajectory" means</h2>
+<p>Suppose the end-effector must move from an initial point</p>
+<div class="arithmatex">\[
+\mathbf{p}_0 =
+\begin{bmatrix}
+x_0\\y_0\\z_0
+\end{bmatrix}
+\]</div>
+<p>to a final point</p>
+<div class="arithmatex">\[
+\mathbf{p}_f =
+\begin{bmatrix}
+x_f\\y_f\\z_f
+\end{bmatrix}
+\]</div>
+<p>A linear trajectory in Cartesian space means the tool position remains on the straight line connecting these two points.</p>
+<p>Using a scalar path parameter <span class="arithmatex">\(s \in [0, 1]\)</span>:</p>
+<div class="arithmatex">\[
+\mathbf{p}(s)=\mathbf{p}_0 + s(\mathbf{p}_f-\mathbf{p}_0)
+\]</div>
+<p>This defines the <strong>geometry of the path</strong>, but not yet the timing.</p>
+<hr />
+<h2 id="23-adding-timing-from-path-to-trajectory">23. Adding timing: from path to trajectory</h2>
+<p>To transform the geometric line into an actual trajectory, we define:</p>
+<div class="arithmatex">\[
+s = s(t)
+\]</div>
+<p>Then the Cartesian trajectory becomes:</p>
+<div class="arithmatex">\[
+\mathbf{p}(t)=\mathbf{p}_0 + s(t)(\mathbf{p}_f-\mathbf{p}_0)
+\]</div>
+<p>So the problem becomes: how fast should the robot move along the line, how should it accelerate, and when should it stop.</p>
+<p>Recall from Lecture 1: <strong>trajectory = path + timing law.</strong></p>
+<hr />
+<h2 id="24-geometric-setup-direction-and-distance">24. Geometric setup: direction and distance</h2>
+<p>Before choosing any speed profile, we extract the two geometric quantities that define the straight-line path.</p>
+<h3 id="241-path-length">24.1 Path length</h3>
+<p>The total distance the end-effector must travel is:</p>
+<div class="arithmatex">\[
+L = \|\mathbf{p}_f - \mathbf{p}_0\|
+= \sqrt{(x_f - x_0)^2 + (y_f - y_0)^2 + (z_f - z_0)^2}
+\]</div>
+<h3 id="242-unit-direction-vector">24.2 Unit direction vector</h3>
+<p>The direction from start to finish, normalized to unit length:</p>
+<div class="arithmatex">\[
+\hat{\mathbf{u}} = \frac{\mathbf{p}_f - \mathbf{p}_0}{L}
+\]</div>
+<p>This vector tells us <em>which way</em> the end-effector moves; its magnitude is always 1.  This vector tells you that for every meter traveled, the end-effector moves in equal parts x y z.</p>
+<h3 id="243-python-computing-path-geometry">24.3 Python — computing path geometry</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>   <span class="c1"># start point [m]</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">pf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>   <span class="c1"># end point   [m]</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">delta</span> <span class="o">=</span> <span class="n">pf</span> <span class="o">-</span> <span class="n">p0</span>              <span class="c1"># displacement vector</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>    <span class="c1"># path length</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">u_hat</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">/</span> <span class="n">L</span>            <span class="c1"># unit direction</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Displacement : </span><span class="si">{</span><span class="n">delta</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Path length L: </span><span class="si">{</span><span class="n">L</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> m&quot;</span><span class="p">)</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unit vector  : </span><span class="si">{</span><span class="n">u_hat</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Displacement : [-0.5  0.5]
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Path length L: 0.7071 m
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Unit vector  : [-0.7071  0.7071]
+</span></code></pre></div>
+<p>For example if the robot moves at 1 m/s along this line, it will move at -0.7071 m/s in x and +0.7071 m/s in y.</p>
+<hr />
+<h2 id="25-distance-traveled-along-the-line">25. Distance traveled along the line</h2>
+<p>With the geometric setup in place, we parameterize <em>how far</em> the end-effector has progressed along the line at time <span class="arithmatex">\(t\)</span>.</p>
+<p>Define <span class="arithmatex">\(\lambda(t)\)</span> as the <strong>arc-length traveled</strong> along the straight line:</p>
+<div class="arithmatex">\[
+0 \le \lambda(t) \le L
+\]</div>
+<p>Then the Cartesian position at any instant is:</p>
+<div class="arithmatex">\[
+\mathbf{p}(t) = \mathbf{p}_0 + \lambda(t)\,\hat{\mathbf{u}}
+\]</div>
+<p>The relationship to the normalized parameter <span class="arithmatex">\(s(t)\)</span> from section 23 is:</p>
+<div class="arithmatex">\[
+\lambda(t) = s(t) \cdot L
+\qquad \Longleftrightarrow \qquad
+s(t) = \frac{\lambda(t)}{L}
+\]</div>
+<hr />
+<h2 id="26-scalar-speed-along-the-line">26. Scalar speed along the line</h2>
+<p>The rate of change of the distance traveled defines the <strong>linear speed</strong> along the path:</p>
+<div class="arithmatex">\[
+v(t) = \dot{\lambda}(t)
+\]</div>
+<p>Since <span class="arithmatex">\(\lambda(t)\)</span> starts at 0 and ends at <span class="arithmatex">\(L\)</span>, we can recover it by integration:</p>
+<div class="arithmatex">\[
+\lambda(t) = \int_0^t v(\tau)\,d\tau
+\]</div>
+<p>Substituting back into the position equation:</p>
+<div class="arithmatex">\[
+\mathbf{p}(t) = \mathbf{p}_0 + \left(\int_0^t v(\tau)\,d\tau\right) \hat{\mathbf{u}}
+\]</div>
+<blockquote>
+<p><strong>Key idea:</strong> once the straight line is defined by <span class="arithmatex">\(\mathbf{p}_0\)</span> and <span class="arithmatex">\(\hat{\mathbf{u}}\)</span>, the entire Cartesian trajectory is determined by a single scalar function <span class="arithmatex">\(v(t)\)</span>.</p>
+</blockquote>
+<p>This means we can apply any of the speed profiles from Lecture 1 (constant, trapezoidal, S-curve) directly to <span class="arithmatex">\(v(t)\)</span>, and the end-effector will follow the line with that speed law.</p>
+<hr />
+<h3 id="261-constant-linear-speed">26.1 Constant linear speed</h3>
+<p>The simplest case is constant speed <span class="arithmatex">\(v(t) = v\)</span>:</p>
+<div class="arithmatex">\[
+\lambda(t) = v\,t, \qquad \mathbf{p}(t) = \mathbf{p}_0 + v\,t\,\hat{\mathbf{u}}
+\]</div>
+<p>Total time: <span class="arithmatex">\(T = L / v\)</span>.</p>
+<p>This is mathematically simple but physically incomplete, because it assumes the robot can instantly start and stop at speed <span class="arithmatex">\(v\)</span>. Just as in joint-space motion, we usually prefer <strong>speed ramps</strong>.</p>
+<hr />
+<h3 id="262-trapezoidal-linear-speed-profile">26.2 Trapezoidal linear speed profile</h3>
+<p>Instead of commanding a constant speed immediately, we define a trapezoidal scalar speed profile with maximum speed <span class="arithmatex">\(v_{\max}\)</span> and maximum acceleration <span class="arithmatex">\(a_{\max}\)</span>:</p>
+<ol>
+<li><strong>Acceleration phase</strong> (<span class="arithmatex">\(0 \le t \le t_a\)</span>): the end-effector accelerates along the line.</li>
+<li><strong>Cruise phase</strong> (<span class="arithmatex">\(t_a &lt; t \le t_a + t_c\)</span>): constant linear speed <span class="arithmatex">\(v_{\max}\)</span>.</li>
+<li><strong>Deceleration phase</strong>: the end-effector decelerates to rest before reaching <span class="arithmatex">\(\mathbf{p}_f\)</span>.</li>
+</ol>
+<p>The acceleration time is:</p>
+<div class="arithmatex">\[
+t_a = \frac{v_{\max}}{a_{\max}}
+\]</div>
+<p>The distance covered during acceleration and deceleration (symmetric):</p>
+<div class="arithmatex">\[
+d_a = \frac{1}{2}\,a_{\max}\,t_a^2 = \frac{v_{\max}^2}{2\,a_{\max}}
+\]</div>
+<p>The remaining distance at cruise speed:</p>
+<div class="arithmatex">\[
+d_c = L - 2\,d_a
+\]</div>
+<p><strong>Trapezoidal vs. triangular check:</strong> if <span class="arithmatex">\(d_c &gt; 0\)</span> the profile is trapezoidal. If <span class="arithmatex">\(d_c \le 0\)</span>, the robot cannot reach <span class="arithmatex">\(v_{\max}\)</span> and the profile becomes triangular (see Lecture 1).</p>
+<p>Cruise time and total time (trapezoidal case):</p>
+<div class="arithmatex">\[
+t_c = \frac{d_c}{v_{\max}}, \qquad T = 2\,t_a + t_c
+\]</div>
+<p>The straight-line geometry remains the same regardless of the speed profile — what changes is only how fast the robot progresses along that line. All the math from Lecture 1 applies directly; the only difference is that now <span class="arithmatex">\(v(t)\)</span> is a scalar speed along a Cartesian line instead of a joint velocity.</p>
+<h3 id="263-python-trapezoidal-speed-profile-for-a-cartesian-line">26.3 Python — trapezoidal speed profile for a Cartesian line</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># --- Path geometry (from section 24) ---</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">pf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">delta</span> <span class="o">=</span> <span class="n">pf</span> <span class="o">-</span> <span class="n">p0</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">u_hat</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">/</span> <span class="n">L</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># --- Speed-profile parameters ---</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="n">v_max</span> <span class="o">=</span> <span class="mf">0.1</span>    <span class="c1"># m/s</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="n">a_max</span> <span class="o">=</span> <span class="mf">0.2</span>    <span class="c1"># m/s²</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="c1"># --- Acceleration phase ---</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="n">t_a</span> <span class="o">=</span> <span class="n">v_max</span> <span class="o">/</span> <span class="n">a_max</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="n">d_a</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">a_max</span> <span class="o">*</span> <span class="n">t_a</span><span class="o">**</span><span class="mi">2</span>            <span class="c1"># distance during accel</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="c1"># --- Trapezoidal / triangular check ---</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="n">d_c</span> <span class="o">=</span> <span class="n">L</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">d_a</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="k">if</span> <span class="n">d_c</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    <span class="n">profile</span> <span class="o">=</span> <span class="s2">&quot;trapezoidal&quot;</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    <span class="n">t_c</span> <span class="o">=</span> <span class="n">d_c</span> <span class="o">/</span> <span class="n">v_max</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="k">else</span><span class="p">:</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    <span class="n">profile</span> <span class="o">=</span> <span class="s2">&quot;triangular&quot;</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    <span class="c1"># Recompute t_a for triangular profile</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>    <span class="n">t_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="n">a_max</span><span class="p">)</span>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>    <span class="n">v_peak</span> <span class="o">=</span> <span class="n">a_max</span> <span class="o">*</span> <span class="n">t_a</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>    <span class="n">t_c</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>    <span class="n">d_c</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="n">T</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t_a</span> <span class="o">+</span> <span class="n">t_c</span>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Profile type : </span><span class="si">{</span><span class="n">profile</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;t_a          : </span><span class="si">{</span><span class="n">t_a</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;t_c          : </span><span class="si">{</span><span class="n">t_c</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T (total)    : </span><span class="si">{</span><span class="n">T</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Profile type : trapezoidal
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>t_a          : 0.5000 s
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>t_c          : 6.5711 s
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>T (total)    : 7.5711 s
+</span></code></pre></div>
+<hr />
+<h2 id="27-cartesian-velocity-along-a-line">27. Cartesian velocity along a line</h2>
+<p>Differentiating the position equation:</p>
+<div class="arithmatex">\[
+\dot{\mathbf{p}}(t) = \dot{\lambda}(t)\,\hat{\mathbf{u}} = v(t)\,\hat{\mathbf{u}}
+\]</div>
+<blockquote>
+<p>The Cartesian velocity vector is the scalar linear speed multiplied by the direction of the line.</p>
+</blockquote>
+<p>Once the direction is known, changing the speed profile only scales the velocity vector. If the line direction is fixed, then the Cartesian velocity always points along that line — only its magnitude changes.</p>
+<hr />
+<h2 id="28-straight-in-cartesian-straight-in-joint-space">28. Straight in Cartesian ≠ straight in joint space</h2>
+<p>Before we convert Cartesian velocities into joint velocities, it is important to understand <em>why</em> this conversion is non-trivial.</p>
+<p>The straight line in Cartesian space is simple for humans to understand: move from A to B in a line. But the corresponding joint motion is usually <strong>not linear</strong>.</p>
+<blockquote>
+<p>A linear Cartesian trajectory generally does not produce a linear joint trajectory.</p>
+</blockquote>
+<p>Even if the end-effector moves in a perfect straight line at constant speed, each joint may speed up, slow down, or reverse curvature. This happens because the mapping between joint space and Cartesian space (forward kinematics) is nonlinear — it involves sines and cosines of the joint angles.</p>
+<p>This is why the Jacobian changes along the motion and must be updated at every time step.</p>
+<div style="width: 80%; margin: 0 auto;">
+  <table style="width: 100%; border-collapse: collapse; text-align: center;">
+    <tr>
+      <td style="width: 50%; padding: 10px;"><img src="../images/nonlinear_movement.png" style="width: 100%;" alt="Image 1"></td>
+      <td style="width: 50%; padding: 10px;"><img src="../images/linear_movement.png" style="width: 100%;" alt="Image 2"></td>
+    </tr>
+    <tr>
+      <td style="padding: 10px;"><img src="../images/pos_joint.png" style="width: 100%; alt="Image 3"></td>
+      <td style="padding: 10px;"><img src="../images/pos_lin.png" style="width: 100%; alt="Image 4"></td>
+    </tr>
+    <tr>
+      <td style="padding: 10px;"><img src="../images/vel_joint.png" style="width: 100%; alt="Image 5"></td>
+      <td style="padding: 10px;"><img src="../images/vel_linear.png" style="width: 100%; alt="Image 6"></td>
+    </tr>
+    <tr>
+      <td style="padding: 10px;"><img src="../images/accel_joint.png" style="width: 100%; alt="Image 7"></td>
+      <td style="padding: 10px;"><img src="../images/accel_lin.png" style="width: 100%; alt="Image 8"></td>
+    </tr>
+  </table>
+</div>
+
+<hr />
+<h2 id="29-converting-cartesian-velocity-to-joint-velocity">29. Converting Cartesian velocity to joint velocity</h2>
+<p>From the Differential Kinematics topic, we know that the Jacobian maps joint velocities to Cartesian velocities:</p>
+<div class="arithmatex">\[
+\dot{\mathbf{p}} = J_v(\mathbf{q})\,\dot{\mathbf{q}}
+\]</div>
+<p>and that jpint velocities can be obtained from Cartesian velocities by inverting the Jacobian:</p>
+<div class="arithmatex">\[
+\dot{\mathbf{q}} = J_v^{-1}(\mathbf{q})\,\dot{\mathbf{p}}
+\qquad \text{or} \qquad
+\dot{\mathbf{q}} = J_v^{+}(\mathbf{q})\,\dot{\mathbf{p}}
+\]</div>
+<p>For a linear Cartesian trajectory, the input <span class="arithmatex">\(\dot{\mathbf{p}} = J_v(\mathbf{q})\,\dot{\mathbf{q}}\)</span> is exactly the kind of desired Cartesian velocity that inverse velocity kinematics expects. We apply it at every time step, recomputing the Jacobian each time because it depends on the current configuration.</p>
+<h3 id="291-python-computing-joint-velocities-from-cartesian-velocity">29.1 Python — computing joint velocities from Cartesian velocity</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">jacobian_2dof</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">l1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">l2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Linear velocity Jacobian for a planar 2-DOF robot.&quot;&quot;&quot;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">q1</span><span class="p">,</span> <span class="n">q2</span> <span class="o">=</span> <span class="n">q</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">s1</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">c1</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">s12</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">q1</span> <span class="o">+</span> <span class="n">q2</span><span class="p">)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="n">c12</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">q1</span> <span class="o">+</span> <span class="n">q2</span><span class="p">)</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="p">[</span><span class="o">-</span><span class="n">l1</span><span class="o">*</span><span class="n">s1</span> <span class="o">-</span> <span class="n">l2</span><span class="o">*</span><span class="n">s12</span><span class="p">,</span>  <span class="o">-</span><span class="n">l2</span><span class="o">*</span><span class="n">s12</span><span class="p">],</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="p">[</span> <span class="n">l1</span><span class="o">*</span><span class="n">c1</span> <span class="o">+</span> <span class="n">l2</span><span class="o">*</span><span class="n">c12</span><span class="p">,</span>   <span class="n">l2</span><span class="o">*</span><span class="n">c12</span><span class="p">]</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="p">])</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="c1"># Example configuration</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>   <span class="c1"># rad</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="c1"># Desired Cartesian velocity (constant speed along the line)</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="n">v</span> <span class="o">=</span> <span class="mf">0.1</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="n">u_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.7071</span><span class="p">,</span> <span class="mf">0.7071</span><span class="p">])</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="n">p_dot</span> <span class="o">=</span> <span class="n">v</span> <span class="o">*</span> <span class="n">u_hat</span>           <span class="c1"># [-0.0707, 0.0707] m/s</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="c1"># Compute Jacobian and joint velocities</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="n">Jv</span> <span class="o">=</span> <span class="n">jacobian_2dof</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="n">q_dot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Jv</span><span class="p">,</span> <span class="n">p_dot</span><span class="p">)</span>   <span class="c1"># J^{-1} * p_dot</span>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jacobian:</span><span class="se">\n</span><span class="si">{</span><span class="n">Jv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Desired p_dot: </span><span class="si">{</span><span class="n">p_dot</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Joint velocities q_dot: </span><span class="si">{</span><span class="n">q_dot</span><span class="si">}</span><span class="s2"> rad/s&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<blockquote>
+<p><strong>Note on <code>np.linalg.solve</code> vs <code>np.linalg.inv</code>:</strong> for a square, non-singular system, <code>np.linalg.solve(A, b)</code> computes <span class="arithmatex">\(A^{-1}b\)</span> more efficiently and more numerically stable than <code>np.linalg.inv(A) @ b</code>. For non-square or singular systems, use <code>np.linalg.pinv(Jv) @ p_dot</code> instead.</p>
+</blockquote>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Jacobian:
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>[[-1.18672757 -0.89120736]
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a> [ 1.40893261  0.45359612]]
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>Desired p_dot: [-0.07071  0.07071]
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Joint velocities q_dot: [0.04313547 0.02190282] rad/s
+</span></code></pre></div>
+<hr />
+<h2 id="30-full-procedure-for-linear-trajectory-generation">30. Full procedure for linear trajectory generation</h2>
+<h3 id="step-1-define-the-initial-and-final-cartesian-points">Step 1. Define the initial and final Cartesian points</h3>
+<div class="arithmatex">\[
+\mathbf{p}_0,\quad \mathbf{p}_f
+\]</div>
+<h3 id="step-2-compute-the-line-direction-and-path-length">Step 2. Compute the line direction and path length</h3>
+<div class="arithmatex">\[
+L=\|\mathbf{p}_f-\mathbf{p}_0\|, \qquad \hat{\mathbf{u}}=\frac{\mathbf{p}_f-\mathbf{p}_0}{L}
+\]</div>
+<h3 id="step-3-choose-a-scalar-speed-law-along-the-path">Step 3. Choose a scalar speed law along the path</h3>
+<p>For example, a trapezoidal profile <span class="arithmatex">\(v(t)\)</span> with chosen <span class="arithmatex">\(v_{\max}\)</span> and <span class="arithmatex">\(a_{\max}\)</span>.</p>
+<h3 id="step-4-compute-the-desired-cartesian-velocity-at-each-time-step">Step 4. Compute the desired Cartesian velocity at each time step</h3>
+<div class="arithmatex">\[
+\dot{\mathbf{p}}(t)=v(t)\,\hat{\mathbf{u}}
+\]</div>
+<h3 id="step-5-convert-cartesian-velocity-into-joint-velocity">Step 5. Convert Cartesian velocity into joint velocity</h3>
+<div class="arithmatex">\[
+\dot{\mathbf{q}}(t)=J_v^{-1}(\mathbf{q})\,\dot{\mathbf{p}}(t)
+\qquad \text{or} \qquad
+\dot{\mathbf{q}}(t)=J_v^{+}(\mathbf{q})\,\dot{\mathbf{p}}(t)
+\]</div>
+<h3 id="step-6-integrate-joint-velocity-to-obtain-joint-trajectory">Step 6. Integrate joint velocity to obtain joint trajectory</h3>
+<div class="arithmatex">\[
+\mathbf{q}_{k+1}=\mathbf{q}_k+\dot{\mathbf{q}}_k\,\Delta t
+\]</div>
+<h3 id="step-7-verify-the-cartesian-path-with-forward-kinematics">Step 7. Verify the Cartesian path with forward kinematics</h3>
+<p>At each instant, use forward kinematics to check whether the end-effector remains close to the desired line.</p>
+<hr />
+<h2 id="31-worked-numerical-example">31. Worked numerical example</h2>
+<p>Consider a planar 2-DOF robot with link lengths <span class="arithmatex">\(l_1 = l_2 = 1\)</span> m. We build the Jacobian using the <strong>geometric method</strong>: for each revolute joint <span class="arithmatex">\(i\)</span>, the corresponding column of the linear velocity Jacobian is:</p>
+<div class="arithmatex">\[
+\mathbf{j}_i = \mathbf{z}_i \times (\mathbf{p}_e - \mathbf{p}_i)
+\]</div>
+<p>where <span class="arithmatex">\(\mathbf{z}_i = (0, 0, 1)\)</span> is the joint axis, <span class="arithmatex">\(\mathbf{p}_i\)</span> is the position of joint <span class="arithmatex">\(i\)</span>, and <span class="arithmatex">\(\mathbf{p}_e\)</span> is the end-effector position. Since we work in 2D, we keep only the <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> components of each cross product.</p>
+<p><strong>Setup:</strong></p>
+<ul>
+<li>Start: <span class="arithmatex">\(\mathbf{p}_0 = (1.5,\; 0.5)\)</span> m</li>
+<li>End: <span class="arithmatex">\(\mathbf{p}_f = (1.0,\; 1.0)\)</span> m</li>
+<li>Linear speed: constant at <span class="arithmatex">\(v = 0.1\)</span> m/s (simplified, no ramp for this example)</li>
+<li>Control loop: <span class="arithmatex">\(\Delta t = 0.01\)</span> s (100 Hz)</li>
+</ul>
+<h3 id="step-1-path-geometry">Step 1. Path geometry</h3>
+<div class="arithmatex">\[
+\mathbf{p}_f - \mathbf{p}_0 = (-0.5,\; 0.5)
+\]</div>
+<div class="arithmatex">\[
+L = \sqrt{(-0.5)^2 + (0.5)^2} = \sqrt{0.5} \approx 0.7071 \text{ m}
+\]</div>
+<div class="arithmatex">\[
+\hat{\mathbf{u}} = \frac{1}{0.7071}(-0.5,\; 0.5) = (-0.7071,\; 0.7071)
+\]</div>
+<h3 id="step-2-desired-cartesian-velocity-constant-speed">Step 2. Desired Cartesian velocity (constant speed)</h3>
+<div class="arithmatex">\[
+\dot{\mathbf{p}} = v \cdot \hat{\mathbf{u}} = 0.1 \times (-0.7071,\; 0.7071) = (-0.0707,\; 0.0707) \text{ m/s}
+\]</div>
+<h3 id="step-3-first-iteration-building-the-geometric-jacobian">Step 3. First iteration — building the geometric Jacobian</h3>
+<p>Suppose inverse kinematics gives the initial configuration <span class="arithmatex">\(q_1 = 0.3\)</span>, <span class="arithmatex">\(q_2 = 0.8\)</span> rad.</p>
+<p><strong>Compute joint and end-effector positions:</strong></p>
+<div class="arithmatex">\[
+\mathbf{p}_1 = (0, \; 0, \; 0) \qquad \text{(base, joint 1)}
+\]</div>
+<div class="arithmatex">\[
+\mathbf{p}_2 = (l_1 \cos q_1, \; l_1 \sin q_1, \; 0) = (\cos 0.3, \; \sin 0.3, \; 0) = (0.9553, \; 0.2955, \; 0) \qquad \text{(joint 2)}
+\]</div>
+<div class="arithmatex">\[
+\mathbf{p}_e = (l_1 \cos q_1 + l_2 \cos(q_1+q_2), \; l_1 \sin q_1 + l_2 \sin(q_1+q_2), \; 0)
+\]</div>
+<div class="arithmatex">\[
+= (0.9553 + 0.4536, \; 0.2955 + 0.8912, \; 0) = (1.4089, \; 1.1867, \; 0)
+\]</div>
+<p><strong>Column 1:</strong> <span class="arithmatex">\(\mathbf{z}_1 \times (\mathbf{p}_e - \mathbf{p}_1)\)</span></p>
+<div class="arithmatex">\[
+\mathbf{p}_e - \mathbf{p}_1 = (1.4089, \; 1.1867, \; 0)
+\]</div>
+<div class="arithmatex">\[
+\mathbf{z} \times (\mathbf{p}_e - \mathbf{p}_1) =
+\begin{vmatrix}
+\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+0 &amp; 0 &amp; 1 \\
+1.4089 &amp; 1.1867 &amp; 0
+\end{vmatrix}
+= (-1.1867, \; 1.4089, \; 0)
+\]</div>
+<p>Keep <span class="arithmatex">\(x, y\)</span>: <span class="arithmatex">\(\mathbf{j}_1 = (-1.1867, \; 1.4089)\)</span></p>
+<p><strong>Column 2:</strong> <span class="arithmatex">\(\mathbf{z}_2 \times (\mathbf{p}_e - \mathbf{p}_2)\)</span></p>
+<div class="arithmatex">\[
+\mathbf{p}_e - \mathbf{p}_2 = (1.4089 - 0.9553, \; 1.1867 - 0.2955, \; 0) = (0.4536, \; 0.8912, \; 0)
+\]</div>
+<div class="arithmatex">\[
+\mathbf{z} \times (\mathbf{p}_e - \mathbf{p}_2) =
+\begin{vmatrix}
+\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+0 &amp; 0 &amp; 1 \\
+0.4536 &amp; 0.8912 &amp; 0
+\end{vmatrix}
+= (-0.8912, \; 0.4536, \; 0)
+\]</div>
+<p>Keep <span class="arithmatex">\(x, y\)</span>: <span class="arithmatex">\(\mathbf{j}_2 = (-0.8912, \; 0.4536)\)</span></p>
+<p><strong>Assemble the Jacobian:</strong></p>
+<div class="arithmatex">\[
+J_v = \begin{bmatrix} \mathbf{j}_1 &amp; \mathbf{j}_2 \end{bmatrix}
+= \begin{bmatrix}
+-1.1867 &amp; -0.8912 \\
+1.4089 &amp; 0.4536
+\end{bmatrix}
+\]</div>
+<h3 id="step-4-invert-the-jacobian">Step 4. Invert the Jacobian</h3>
+<p>Compute the determinant:</p>
+<div class="arithmatex">\[
+\det(J_v) = (-1.1867)(0.4536) - (-0.8912)(1.4089) = -0.5383 + 1.2555 = 0.7172
+\]</div>
+<p>The determinant is nonzero, so the Jacobian is invertible. Using the <span class="arithmatex">\(2 \times 2\)</span> inverse formula:</p>
+<div class="arithmatex">\[
+J_v^{-1} = \frac{1}{0.7172}
+\begin{bmatrix}
+0.4536 &amp; 0.8912 \\
+-1.4089 &amp; -1.1867
+\end{bmatrix}
+= \begin{bmatrix}
+0.6325 &amp; 1.2427 \\
+-1.9645 &amp; -1.6547
+\end{bmatrix}
+\]</div>
+<h3 id="step-5-compute-joint-velocities">Step 5. Compute joint velocities</h3>
+<div class="arithmatex">\[
+\dot{\mathbf{q}}_0 = J_v^{-1} \dot{\mathbf{p}}
+= \begin{bmatrix}
+0.6325 &amp; 1.2427 \\
+-1.9645 &amp; -1.6547
+\end{bmatrix}
+\begin{bmatrix}
+-0.0707 \\
+0.0707
+\end{bmatrix}
+\]</div>
+<div class="arithmatex">\[
+\dot{q}_1 = (0.6325)(-0.0707) + (1.2427)(0.0707) = -0.0447 + 0.0879 = 0.0431 \text{ rad/s}
+\]</div>
+<div class="arithmatex">\[
+\dot{q}_2 = (-1.9645)(-0.0707) + (-1.6547)(0.0707) = 0.1389 - 0.1170 = 0.0219 \text{ rad/s}
+\]</div>
+<h3 id="step-6-update-joint-positions">Step 6. Update joint positions</h3>
+<div class="arithmatex">\[
+\mathbf{q}_1 = \mathbf{q}_0 + \dot{\mathbf{q}}_0 \, \Delta t
+= \begin{bmatrix} 0.3 \\ 0.8 \end{bmatrix}
++ \begin{bmatrix} 0.0431 \\ 0.0219 \end{bmatrix} \times 0.01
+= \begin{bmatrix} 0.3004 \\ 0.8002 \end{bmatrix}
+\]</div>
+<h3 id="step-7-verify-with-forward-kinematics">Step 7. Verify with forward kinematics</h3>
+<div class="arithmatex">\[
+x = \cos(0.3004) + \cos(1.1006), \qquad y = \sin(0.3004) + \sin(1.1006)
+\]</div>
+<p>This should be very close to <span class="arithmatex">\((1.4993,\; 0.5007)\)</span>.</p>
+<h3 id="step-8-repeat">Step 8. Repeat</h3>
+<p>Recompute joint positions <span class="arithmatex">\(\mathbf{p}_1\)</span>, <span class="arithmatex">\(\mathbf{p}_2\)</span>, <span class="arithmatex">\(\mathbf{p}_e\)</span> at the new configuration, rebuild the Jacobian via cross products, invert, and continue. <strong>Even though the Cartesian velocity is constant, the joint velocities change at every step</strong> because the joint positions — and therefore the Jacobian columns — depend on the current configuration.</p>
+<hr />
+<h3 id="311-python-full-trajectory-loop">31.1 Python — full trajectory loop</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># =====================================================================</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Robot model — geometric Jacobian</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># =====================================================================</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">forward_kinematics</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">l1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">l2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;End-effector position for a planar 2-DOF robot.&quot;&quot;&quot;</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">l1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">l2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">l1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">l2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">jacobian_2dof_geometric</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">l1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">l2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Linear velocity Jacobian using the geometric method.</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="sd">    For each revolute joint i:</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="sd">        J_v column i = z_i × (p_e - p_i)</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="sd">    where z_i = [0, 0, 1] is the joint axis.</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="sd">    We keep only x and y components of the cross product.</span>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>    <span class="c1"># Joint positions (in 3D for cross product)</span>
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>    <span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>    <span class="n">p1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">l1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">l1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mf">0.0</span><span class="p">])</span>
+</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>    <span class="c1"># End-effector position</span>
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>    <span class="n">pe</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>        <span class="n">l1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">l2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>        <span class="n">l1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">l2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>        <span class="mf">0.0</span>
+</span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>    <span class="p">])</span>
+</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>
+</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>    <span class="c1"># Joint axis (same for both revolute joints)</span>
+</span><span id="__span-6-32"><a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+</span><span id="__span-6-33"><a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>
+</span><span id="__span-6-34"><a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>    <span class="c1"># Jacobian columns: z × (pe - pi), keep x and y</span>
+</span><span id="__span-6-35"><a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a>    <span class="n">col1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">pe</span> <span class="o">-</span> <span class="n">p0</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]</span>
+</span><span id="__span-6-36"><a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a>    <span class="n">col2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">pe</span> <span class="o">-</span> <span class="n">p1</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]</span>
+</span><span id="__span-6-37"><a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a>
+</span><span id="__span-6-38"><a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">col1</span><span class="p">,</span> <span class="n">col2</span><span class="p">])</span>
+</span><span id="__span-6-39"><a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a>
+</span><span id="__span-6-40"><a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a><span class="k">def</span><span class="w"> </span><span class="nf">inverse_kinematics_2dof</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">l1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">l2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">elbow_up</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="__span-6-41"><a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Analytic inverse kinematics for a planar 2-DOF robot.&quot;&quot;&quot;</span>
+</span><span id="__span-6-42"><a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">p</span>
+</span><span id="__span-6-43"><a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a>    <span class="n">c2</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">l1</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">l2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l1</span> <span class="o">*</span> <span class="n">l2</span><span class="p">)</span>
+</span><span id="__span-6-44"><a id="__codelineno-6-44" name="__codelineno-6-44" href="#__codelineno-6-44"></a>    <span class="n">c2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+</span><span id="__span-6-45"><a id="__codelineno-6-45" name="__codelineno-6-45" href="#__codelineno-6-45"></a>    <span class="n">s2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">c2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="n">elbow_up</span> <span class="k">else</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">c2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-6-46"><a id="__codelineno-6-46" name="__codelineno-6-46" href="#__codelineno-6-46"></a>    <span class="n">q2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+</span><span id="__span-6-47"><a id="__codelineno-6-47" name="__codelineno-6-47" href="#__codelineno-6-47"></a>    <span class="n">q1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">l2</span> <span class="o">*</span> <span class="n">s2</span><span class="p">,</span> <span class="n">l1</span> <span class="o">+</span> <span class="n">l2</span> <span class="o">*</span> <span class="n">c2</span><span class="p">)</span>
+</span><span id="__span-6-48"><a id="__codelineno-6-48" name="__codelineno-6-48" href="#__codelineno-6-48"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">])</span>
+</span><span id="__span-6-49"><a id="__codelineno-6-49" name="__codelineno-6-49" href="#__codelineno-6-49"></a>
+</span><span id="__span-6-50"><a id="__codelineno-6-50" name="__codelineno-6-50" href="#__codelineno-6-50"></a><span class="c1"># =====================================================================</span>
+</span><span id="__span-6-51"><a id="__codelineno-6-51" name="__codelineno-6-51" href="#__codelineno-6-51"></a><span class="c1"># Trajectory parameters</span>
+</span><span id="__span-6-52"><a id="__codelineno-6-52" name="__codelineno-6-52" href="#__codelineno-6-52"></a><span class="c1"># =====================================================================</span>
+</span><span id="__span-6-53"><a id="__codelineno-6-53" name="__codelineno-6-53" href="#__codelineno-6-53"></a><span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+</span><span id="__span-6-54"><a id="__codelineno-6-54" name="__codelineno-6-54" href="#__codelineno-6-54"></a><span class="n">pf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+</span><span id="__span-6-55"><a id="__codelineno-6-55" name="__codelineno-6-55" href="#__codelineno-6-55"></a>
+</span><span id="__span-6-56"><a id="__codelineno-6-56" name="__codelineno-6-56" href="#__codelineno-6-56"></a><span class="n">delta</span> <span class="o">=</span> <span class="n">pf</span> <span class="o">-</span> <span class="n">p0</span>
+</span><span id="__span-6-57"><a id="__codelineno-6-57" name="__codelineno-6-57" href="#__codelineno-6-57"></a><span class="n">L</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+</span><span id="__span-6-58"><a id="__codelineno-6-58" name="__codelineno-6-58" href="#__codelineno-6-58"></a><span class="n">u_hat</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">/</span> <span class="n">L</span>
+</span><span id="__span-6-59"><a id="__codelineno-6-59" name="__codelineno-6-59" href="#__codelineno-6-59"></a>
+</span><span id="__span-6-60"><a id="__codelineno-6-60" name="__codelineno-6-60" href="#__codelineno-6-60"></a><span class="n">v_lin</span> <span class="o">=</span> <span class="mf">0.1</span>     <span class="c1"># constant linear speed [m/s]</span>
+</span><span id="__span-6-61"><a id="__codelineno-6-61" name="__codelineno-6-61" href="#__codelineno-6-61"></a><span class="n">dt</span>    <span class="o">=</span> <span class="mf">0.01</span>    <span class="c1"># control period [s]</span>
+</span><span id="__span-6-62"><a id="__codelineno-6-62" name="__codelineno-6-62" href="#__codelineno-6-62"></a><span class="n">T</span>     <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">v_lin</span>
+</span><span id="__span-6-63"><a id="__codelineno-6-63" name="__codelineno-6-63" href="#__codelineno-6-63"></a><span class="n">N</span>     <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="n">dt</span><span class="p">))</span>
+</span><span id="__span-6-64"><a id="__codelineno-6-64" name="__codelineno-6-64" href="#__codelineno-6-64"></a>
+</span><span id="__span-6-65"><a id="__codelineno-6-65" name="__codelineno-6-65" href="#__codelineno-6-65"></a><span class="c1"># =====================================================================</span>
+</span><span id="__span-6-66"><a id="__codelineno-6-66" name="__codelineno-6-66" href="#__codelineno-6-66"></a><span class="c1"># Initial joint configuration (via inverse kinematics)</span>
+</span><span id="__span-6-67"><a id="__codelineno-6-67" name="__codelineno-6-67" href="#__codelineno-6-67"></a><span class="c1"># =====================================================================</span>
+</span><span id="__span-6-68"><a id="__codelineno-6-68" name="__codelineno-6-68" href="#__codelineno-6-68"></a><span class="n">q</span> <span class="o">=</span> <span class="n">inverse_kinematics_2dof</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+</span><span id="__span-6-69"><a id="__codelineno-6-69" name="__codelineno-6-69" href="#__codelineno-6-69"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial q: </span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2"> rad&quot;</span><span class="p">)</span>
+</span><span id="__span-6-70"><a id="__codelineno-6-70" name="__codelineno-6-70" href="#__codelineno-6-70"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;FK check : </span><span class="si">{</span><span class="n">forward_kinematics</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="si">}</span><span class="s2">  (should be ≈ </span><span class="si">{</span><span class="n">p0</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</span><span id="__span-6-71"><a id="__codelineno-6-71" name="__codelineno-6-71" href="#__codelineno-6-71"></a>
+</span><span id="__span-6-72"><a id="__codelineno-6-72" name="__codelineno-6-72" href="#__codelineno-6-72"></a><span class="c1"># =====================================================================</span>
+</span><span id="__span-6-73"><a id="__codelineno-6-73" name="__codelineno-6-73" href="#__codelineno-6-73"></a><span class="c1"># Main trajectory loop</span>
+</span><span id="__span-6-74"><a id="__codelineno-6-74" name="__codelineno-6-74" href="#__codelineno-6-74"></a><span class="c1"># =====================================================================</span>
+</span><span id="__span-6-75"><a id="__codelineno-6-75" name="__codelineno-6-75" href="#__codelineno-6-75"></a><span class="n">q_traj</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</span><span id="__span-6-76"><a id="__codelineno-6-76" name="__codelineno-6-76" href="#__codelineno-6-76"></a><span class="n">p_traj</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</span><span id="__span-6-77"><a id="__codelineno-6-77" name="__codelineno-6-77" href="#__codelineno-6-77"></a><span class="n">qdot_traj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</span><span id="__span-6-78"><a id="__codelineno-6-78" name="__codelineno-6-78" href="#__codelineno-6-78"></a>
+</span><span id="__span-6-79"><a id="__codelineno-6-79" name="__codelineno-6-79" href="#__codelineno-6-79"></a><span class="n">q_traj</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span>
+</span><span id="__span-6-80"><a id="__codelineno-6-80" name="__codelineno-6-80" href="#__codelineno-6-80"></a><span class="n">p_traj</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">forward_kinematics</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+</span><span id="__span-6-81"><a id="__codelineno-6-81" name="__codelineno-6-81" href="#__codelineno-6-81"></a>
+</span><span id="__span-6-82"><a id="__codelineno-6-82" name="__codelineno-6-82" href="#__codelineno-6-82"></a><span class="n">p_dot</span> <span class="o">=</span> <span class="n">v_lin</span> <span class="o">*</span> <span class="n">u_hat</span>               <span class="c1"># constant Cartesian velocity</span>
+</span><span id="__span-6-83"><a id="__codelineno-6-83" name="__codelineno-6-83" href="#__codelineno-6-83"></a>
+</span><span id="__span-6-84"><a id="__codelineno-6-84" name="__codelineno-6-84" href="#__codelineno-6-84"></a><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+</span><span id="__span-6-85"><a id="__codelineno-6-85" name="__codelineno-6-85" href="#__codelineno-6-85"></a>    <span class="c1"># 1. Geometric Jacobian at current configuration</span>
+</span><span id="__span-6-86"><a id="__codelineno-6-86" name="__codelineno-6-86" href="#__codelineno-6-86"></a>    <span class="n">Jv</span> <span class="o">=</span> <span class="n">jacobian_2dof_geometric</span><span class="p">(</span><span class="n">q_traj</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+</span><span id="__span-6-87"><a id="__codelineno-6-87" name="__codelineno-6-87" href="#__codelineno-6-87"></a>
+</span><span id="__span-6-88"><a id="__codelineno-6-88" name="__codelineno-6-88" href="#__codelineno-6-88"></a>    <span class="c1"># 2. Joint velocity via inverse velocity kinematics</span>
+</span><span id="__span-6-89"><a id="__codelineno-6-89" name="__codelineno-6-89" href="#__codelineno-6-89"></a>    <span class="n">q_dot_k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Jv</span><span class="p">,</span> <span class="n">p_dot</span><span class="p">)</span>
+</span><span id="__span-6-90"><a id="__codelineno-6-90" name="__codelineno-6-90" href="#__codelineno-6-90"></a>    <span class="n">qdot_traj</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">q_dot_k</span>
+</span><span id="__span-6-91"><a id="__codelineno-6-91" name="__codelineno-6-91" href="#__codelineno-6-91"></a>
+</span><span id="__span-6-92"><a id="__codelineno-6-92" name="__codelineno-6-92" href="#__codelineno-6-92"></a>    <span class="c1"># 3. Integrate: update joint positions</span>
+</span><span id="__span-6-93"><a id="__codelineno-6-93" name="__codelineno-6-93" href="#__codelineno-6-93"></a>    <span class="n">q_traj</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">q_traj</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">q_dot_k</span> <span class="o">*</span> <span class="n">dt</span>
+</span><span id="__span-6-94"><a id="__codelineno-6-94" name="__codelineno-6-94" href="#__codelineno-6-94"></a>
+</span><span id="__span-6-95"><a id="__codelineno-6-95" name="__codelineno-6-95" href="#__codelineno-6-95"></a>    <span class="c1"># 4. Forward kinematics for verification</span>
+</span><span id="__span-6-96"><a id="__codelineno-6-96" name="__codelineno-6-96" href="#__codelineno-6-96"></a>    <span class="n">p_traj</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">forward_kinematics</span><span class="p">(</span><span class="n">q_traj</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-6-97"><a id="__codelineno-6-97" name="__codelineno-6-97" href="#__codelineno-6-97"></a>
+</span><span id="__span-6-98"><a id="__codelineno-6-98" name="__codelineno-6-98" href="#__codelineno-6-98"></a><span class="c1"># =====================================================================</span>
+</span><span id="__span-6-99"><a id="__codelineno-6-99" name="__codelineno-6-99" href="#__codelineno-6-99"></a><span class="c1"># Results</span>
+</span><span id="__span-6-100"><a id="__codelineno-6-100" name="__codelineno-6-100" href="#__codelineno-6-100"></a><span class="c1"># =====================================================================</span>
+</span><span id="__span-6-101"><a id="__codelineno-6-101" name="__codelineno-6-101" href="#__codelineno-6-101"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Final joint angles : </span><span class="si">{</span><span class="n">q_traj</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> rad&quot;</span><span class="p">)</span>
+</span><span id="__span-6-102"><a id="__codelineno-6-102" name="__codelineno-6-102" href="#__codelineno-6-102"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final EE position  : </span><span class="si">{</span><span class="n">p_traj</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-6-103"><a id="__codelineno-6-103" name="__codelineno-6-103" href="#__codelineno-6-103"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Desired final pos  : </span><span class="si">{</span><span class="n">pf</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-6-104"><a id="__codelineno-6-104" name="__codelineno-6-104" href="#__codelineno-6-104"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Position error     : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">p_traj</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">pf</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> m&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="312-python-trapezoidal-speed-version">31.2 Python — trapezoidal speed version</h3>
+<p>To use a trapezoidal speed profile instead of constant speed, replace the constant <code>p_dot</code> inside the loop:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">trapezoidal_speed</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_a</span><span class="p">,</span> <span class="n">t_c</span><span class="p">,</span> <span class="n">v_max</span><span class="p">,</span> <span class="n">a_max</span><span class="p">):</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Scalar speed v(t) for a trapezoidal profile.&quot;&quot;&quot;</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="n">T</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t_a</span> <span class="o">+</span> <span class="n">t_c</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>        <span class="k">return</span> <span class="mf">0.0</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="k">elif</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">t_a</span><span class="p">:</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        <span class="k">return</span> <span class="n">a_max</span> <span class="o">*</span> <span class="n">t</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="k">elif</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">t_a</span> <span class="o">+</span> <span class="n">t_c</span><span class="p">:</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        <span class="k">return</span> <span class="n">v_max</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="k">elif</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">T</span><span class="p">:</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        <span class="k">return</span> <span class="n">v_max</span> <span class="o">-</span> <span class="n">a_max</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t_a</span> <span class="o">-</span> <span class="n">t_c</span><span class="p">)</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>        <span class="k">return</span> <span class="mf">0.0</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="c1"># Inside the loop, replace the constant p_dot with:</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>    <span class="n">t_k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">dt</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>    <span class="n">v_k</span> <span class="o">=</span> <span class="n">trapezoidal_speed</span><span class="p">(</span><span class="n">t_k</span><span class="p">,</span> <span class="n">t_a</span><span class="p">,</span> <span class="n">t_c</span><span class="p">,</span> <span class="n">v_max</span><span class="p">,</span> <span class="n">a_max</span><span class="p">)</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>    <span class="n">p_dot_k</span> <span class="o">=</span> <span class="n">v_k</span> <span class="o">*</span> <span class="n">u_hat</span>              <span class="c1"># &lt;-- time-varying Cartesian velocity</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>    <span class="n">Jv</span> <span class="o">=</span> <span class="n">jacobian_2dof_geometric</span><span class="p">(</span><span class="n">q_traj</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>    <span class="n">q_dot_k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Jv</span><span class="p">,</span> <span class="n">p_dot_k</span><span class="p">)</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>    <span class="n">qdot_traj</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">q_dot_k</span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>    <span class="n">q_traj</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">q_traj</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">q_dot_k</span> <span class="o">*</span> <span class="n">dt</span>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>    <span class="n">p_traj</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">forward_kinematics</span><span class="p">(</span><span class="n">q_traj</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+</span></code></pre></div>
+<hr />
+<h2 id="32-the-velocity-based-approach-what-it-means">32. The velocity-based approach: what it means</h2>
+<p>We are not solving inverse kinematics for each point along the line. Instead, we are continuously updating the joints so that the end-effector velocity follows the desired Cartesian velocity.</p>
+<p>This is a <strong>velocity-based trajectory generation approach</strong>:</p>
+<ul>
+<li>generate a desired Cartesian velocity at every instant,</li>
+<li>convert it to joint velocity at every instant,</li>
+<li>integrate the result through time.</li>
+</ul>
+<hr />
+<h2 id="33-main-limitations">33. Main limitations</h2>
+<h3 id="331-singularity-risk">33.1 Singularity risk</h3>
+<p>If the Jacobian becomes singular or near-singular, the required joint velocities may become very large.</p>
+<p><strong>Physical example:</strong> if the robot tries to move in a straight line that passes directly through or near its own base axis, or if the arm is fully extended, the required joint velocities to maintain a given linear speed will approach infinity. The math blows up because the mechanism physically cannot produce that Cartesian motion from that configuration.</p>
+<p><strong>Practical check in code:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">det_J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">Jv</span><span class="p">)</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">det_J</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: near-singular Jacobian, det =&quot;</span><span class="p">,</span> <span class="n">det_J</span><span class="p">)</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="c1"># Reduce speed, stop, or use damped pseudoinverse</span>
+</span></code></pre></div>
+<h3 id="332-joint-limits">33.2 Joint limits</h3>
+<p>Even if the Cartesian path is valid, the required joint motion may violate joint position limits, velocity limits, or acceleration limits.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">Q_MIN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">])</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">Q_MAX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span>  <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">])</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">QDOT_MAX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>       <span class="c1"># rad/s</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># After computing q_dot and q_next:</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">q_next</span> <span class="o">&lt;</span> <span class="n">Q_MIN</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">q_next</span> <span class="o">&gt;</span> <span class="n">Q_MAX</span><span class="p">):</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: joint position limit violated&quot;</span><span class="p">)</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">q_dot</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">QDOT_MAX</span><span class="p">):</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: joint velocity limit violated&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="333-numerical-drift">33.3 Numerical drift</h3>
+<p>If joint velocities are integrated numerically, accumulated error may cause deviation from the desired path over time. The standard practical fix is to periodically correct the integrated joint position against the desired Cartesian position using inverse position kinematics. This prevents small errors from accumulating into visible path deviation.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Periodically (e.g. every 100 steps):</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">if</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="n">p_desired_k</span> <span class="o">=</span> <span class="n">p0</span> <span class="o">+</span> <span class="n">lam_array</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">u_hat</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">p_actual_k</span>  <span class="o">=</span> <span class="n">forward_kinematics</span><span class="p">(</span><span class="n">q_traj</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">p_desired_k</span> <span class="o">-</span> <span class="n">p_actual_k</span><span class="p">)</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="k">if</span> <span class="n">error</span> <span class="o">&gt;</span> <span class="mf">1e-4</span><span class="p">:</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        <span class="c1"># Recompute joint angles from desired Cartesian position</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>        <span class="n">q_traj</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">inverse_kinematics_2dof</span><span class="p">(</span><span class="n">p_desired_k</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="334-orientation-not-yet-controlled">33.4 Orientation not yet controlled</h3>
+<p>If we only use the linear Jacobian <span class="arithmatex">\(J_v\)</span>, then we control only end-effector position, not orientation. This is acceptable as a first step, but later the full spatial velocity (linear + angular) should be considered using the full <span class="arithmatex">\(6 \times n\)</span> Jacobian.</p>
+<hr />
+<h2 id="37-exercises">37. Exercises</h2>
+<h3 id="exercise-6">Exercise 6</h3>
+<p>Given <span class="arithmatex">\(\mathbf{p}_0 = (0.8,\; 0.2)\)</span> m and <span class="arithmatex">\(\mathbf{p}_f = (0.4,\; 0.6)\)</span> m, compute the path length <span class="arithmatex">\(L\)</span> and the unit direction vector <span class="arithmatex">\(\hat{\mathbf{u}}\)</span>.</p>
+<h3 id="exercise-7">Exercise 7</h3>
+<p>For the path from Exercise 6, assign a trapezoidal scalar speed profile with <span class="arithmatex">\(v_{\max} = 0.05\)</span> m/s and <span class="arithmatex">\(a_{\max} = 0.1\)</span> m/s². Determine whether the profile is trapezoidal or triangular. Compute <span class="arithmatex">\(t_a\)</span>, <span class="arithmatex">\(t_c\)</span>, and <span class="arithmatex">\(T\)</span>.</p>
+<h3 id="exercise-8">Exercise 8</h3>
+<p>Consider a planar 2-DOF robot with <span class="arithmatex">\(l_1 = l_2 = 1\)</span> m at configuration <span class="arithmatex">\(q_1 = 0.5\)</span>, <span class="arithmatex">\(q_2 = 1.0\)</span> rad. The desired Cartesian velocity is <span class="arithmatex">\(\dot{\mathbf{p}} = (-0.035,\; 0.035)\)</span> m/s.</p>
+<p><strong>Part a.</strong> Compute the joint positions <span class="arithmatex">\(\mathbf{p}_1\)</span>, <span class="arithmatex">\(\mathbf{p}_2\)</span> and end-effector position <span class="arithmatex">\(\mathbf{p}_e\)</span>.</p>
+<p><strong>Part b.</strong> Build the geometric Jacobian using <span class="arithmatex">\(\mathbf{j}_i = \mathbf{z}_i \times (\mathbf{p}_e - \mathbf{p}_i)\)</span>, keeping only the <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> components.</p>
+<p><strong>Part c.</strong> Compute the determinant of <span class="arithmatex">\(J_v\)</span> and verify it is non-singular.</p>
+<p><strong>Part d.</strong> Compute <span class="arithmatex">\(J_v^{-1}\)</span> using the <span class="arithmatex">\(2 \times 2\)</span> inverse formula.</p>
+<p><strong>Part e.</strong> Compute the required joint velocities <span class="arithmatex">\(\dot{\mathbf{q}}_k = J_v^{-1}\,\dot{\mathbf{p}}\)</span>.</p>
+<p><strong>Part f.</strong> Verify your result by checking that <span class="arithmatex">\(J_v \, \dot{\mathbf{q}}_k = \dot{\mathbf{p}}\)</span>.</p>
+<h3 id="exercise-9">Exercise 9</h3>
+<p>If the Cartesian speed is doubled from <span class="arithmatex">\(v\)</span> to <span class="arithmatex">\(2v\)</span> along the same line, what happens to the required joint velocities? What happens to the total trajectory time? Justify mathematically.</p>
+<h3 id="exercise-10">Exercise 10</h3>
+<p>Explain in your own words why a straight-line Cartesian trajectory produces nonlinear joint trajectories, even when the Cartesian speed is constant.</p>
+<h3 id="exercise-11">Exercise 11</h3>
+<p>Using the code from section 31.1 as a starting point, modify it to explore the following three scenarios. For each one, plot the end-effector path in the <span class="arithmatex">\(xy\)</span>-plane, joint angles over time, and joint velocities over time.</p>
+<p><strong>Scenario A.</strong> Change the endpoints to <span class="arithmatex">\(\mathbf{p}_0 = (1.0,\; 0.2)\)</span> and <span class="arithmatex">\(\mathbf{p}_f = (0.5,\; 1.2)\)</span>. Does the end-effector still follow a straight line?</p>
+<p><strong>Scenario B.</strong> Replace the constant speed with a trapezoidal profile using <span class="arithmatex">\(v_{\max} = 0.1\)</span> m/s and <span class="arithmatex">\(a_{\max} = 0.2\)</span> m/s² (use the code from section 31.2). Compare the joint velocity plots against the constant-speed case.</p>
+<p><strong>Scenario C.</strong> Use the original endpoints but set <span class="arithmatex">\(\mathbf{p}_f = (1.95,\; 0.1)\)</span>, which brings the arm close to full extension. Monitor the determinant of the Jacobian at each step and observe what happens to the joint velocities. At what point does the motion become problematic?</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.tooltips", "toc.integrate", "navigation.sections"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+      
+    
+  </body>
+</html>

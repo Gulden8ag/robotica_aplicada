@@ -1,0 +1,2457 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../M1_Manipulator_Kinematics/T1_3/">
+      
+      
+        <link rel="next" href="../T0_2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Differential Kinematics and the Jacobian - Applied Robotics (12224)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.2/css/all.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+      <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#differential-kinematics-and-the-jacobian" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Applied Robotics (12224)" class="md-header__button md-logo" aria-label="Applied Robotics (12224)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Applied Robotics (12224)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Differential Kinematics and the Jacobian
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Applied Robotics (12224)" class="md-nav__button md-logo" aria-label="Applied Robotics (12224)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Applied Robotics (12224)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applied Robotics (12224)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course Overview
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Course Overview
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course_Overview/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syllabus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course_Overview/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Example Documentation 
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course_Overview/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources for class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M0 Fundamentals and Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M0 Fundamentals and Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Taxonomies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Degrees of Freedom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration space (C-space) vs Workspace (W-space)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Constraints in Robotics — Holonomic, Non-holonomic, and Pfaffian Form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install and configure ROS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ros2 Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First Program in ROS 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Create a Service Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Create a Service Client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS2 Jazzy — Custom Interface Message
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Custom Service Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Parameters in Python Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Launch Files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M1 Manipulator Kinematics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M1 Manipulator Kinematics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T0_0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spatial Descriptions and Transformations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forward Kinematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inverse kinematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Numerical IK from DH Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RViz2 and TF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    URDF Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M1_Manipulator_Kinematics/T1_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    URDF Joints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M2 Dynamics and Control
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M2 Dynamics and Control
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differential Kinematics and the Jacobian
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differential Kinematics and the Jacobian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-differential-kinematics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Differential Kinematics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-jacobian-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Jacobian Matrix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Jacobian Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#applications-of-the-jacobian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Applications of the Jacobian
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-forward-velocity-kinematics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Forward Velocity Kinematics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Forward Velocity Kinematics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practical-meaning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical meaning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-inverse-velocity-kinematics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Inverse Velocity Kinematics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Inverse Velocity Kinematics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-the-jacobian-is-invertible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When the Jacobian is invertible
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-the-jacobian-is-not-square" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When the Jacobian is not square
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applications-of-inverse-velocity-kinematics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Applications of inverse velocity kinematics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-singularities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Singularities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Singularities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-happens-at-a-singularity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What happens at a singularity?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#physical-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Physical interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applications-of-singularities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Applications of singularities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-velocity-ellipsoids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Velocity Ellipsoids
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Velocity Ellipsoids">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretation-of-the-ellipsoid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretation of the ellipsoid
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applications-of-velocity-ellipsoids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Applications of velocity ellipsoids
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-applications-of-velocity-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Applications of Velocity Analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Applications of Velocity Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-smooth-robot-motion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Smooth robot motion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-trajectory-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Trajectory tracking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-actuator-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Actuator limits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-velocity-actuator-effort-and-motion-feasibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Velocity, actuator effort, and motion feasibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-velocity-in-trajectory-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Velocity in trajectory generation
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gazebo + ROS 2 Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gazebo IK Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M3 Trajectory planning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M3 Trajectory planning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M3_Trajectory_planning/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning I
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M3_Trajectory_planning/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning II: Linear Cartesian Trajectories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M3_Trajectory_planning/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M3_Trajectory_planning/T0_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning Joint-Space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M3_Trajectory_planning/T0_5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning Cartesian Trajectory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M3_Trajectory_planning/T0_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning — Homework: Multi-Pose Trajectories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M4 Mobile Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M4 Mobile Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M4_Mobile_Fundamentals/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Kinematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M4_Mobile_Fundamentals/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Navigation with ROS 2 and Nav2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M4_Mobile_Fundamentals/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Simulation with Gazebo and ros2_control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M6 Integration and validation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M6 Integration and validation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M6_Integration_and_validation/T6_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    T6 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M6_Integration_and_validation/T6_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Project Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="differential-kinematics-and-the-jacobian">Differential Kinematics and the Jacobian</h1>
+<h2 id="introduction">Introduction</h2>
+<p>In the previous topic, we studied inverse kinematics, where the main objective was to determine the joint variables required to place the end-effector at a desired position or pose.</p>
+<p>Now we move one level deeper.</p>
+<p>Instead of asking:</p>
+<ul>
+<li>Where is the robot?</li>
+</ul>
+<p>we ask:</p>
+<ul>
+<li>How fast is the robot moving?</li>
+<li>How fast is the end-effector moving?</li>
+<li>What joint velocities are needed to produce a desired Cartesian motion?</li>
+<li>What happens to these velocities near problematic configurations?</li>
+</ul>
+<p>This is the domain of <strong>differential kinematics</strong>.</p>
+<p>Differential kinematics is important because robots do not only move between isolated points. In real applications, robots must move <strong>continuously</strong>, <strong>smoothly</strong>, and <strong>safely</strong>. To do that, we need a mathematical relationship between joint velocities and end-effector velocities.</p>
+<p>That relationship is given by the <strong>Jacobian matrix</strong>.</p>
+<hr />
+<h2 id="1-differential-kinematics">1. Differential Kinematics</h2>
+<p>Differential kinematics studies the relationship between:</p>
+<ul>
+<li><strong>joint velocities</strong>, and</li>
+<li><strong>Cartesian end-effector velocities</strong></li>
+</ul>
+<p>For a manipulator with joint variables:</p>
+<div class="arithmatex">\[
+q = \begin{bmatrix} q_1 &amp; q_2 &amp; \dots &amp; q_n \end{bmatrix}^T
+\]</div>
+<p>the joint velocity vector is:</p>
+<div class="arithmatex">\[
+\dot{q} = \begin{bmatrix} \dot{q}_1 &amp; \dot{q}_2 &amp; \dots &amp; \dot{q}_n \end{bmatrix}^T
+\]</div>
+<p>At the end-effector, we define a Cartesian velocity vector. In the most general spatial case, this includes:</p>
+<ul>
+<li>linear velocity</li>
+<li>angular velocity</li>
+</ul>
+<p>and is often grouped into the twist:</p>
+<div class="arithmatex">\[
+\nu = \begin{bmatrix} v \\ \omega \end{bmatrix}
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(v \in \mathbb{R}^3\)</span> is the linear velocity</li>
+<li><span class="arithmatex">\(\omega \in \mathbb{R}^3\)</span> is the angular velocity</li>
+</ul>
+<p>The central equation of differential kinematics is:</p>
+<div class="arithmatex">\[
+\nu = J(q)\dot{q}
+\]</div>
+<p>where <span class="arithmatex">\(J(q)\)</span> is the <strong>Jacobian matrix</strong>.</p>
+<hr />
+<h2 id="2-jacobian-matrix">2. Jacobian Matrix</h2>
+<p>The <strong>Jacobian matrix</strong> is a transformation matrix that maps joint velocities to Cartesian end-effector velocities.</p>
+<p>It is one of the most important tools in robotics because it connects motion in <strong>joint space</strong> with motion in <strong>task space</strong>.</p>
+<p>The Jacobian depends on the robot configuration:</p>
+<div class="arithmatex">\[
+J = J(q)
+\]</div>
+<p>This means that the velocity relationship changes as the robot moves.</p>
+<h3 id="applications-of-the-jacobian">Applications of the Jacobian</h3>
+<p>The Jacobian tells us:</p>
+<ol>
+<li>how motion in each joint contributes to end-effector motion,</li>
+<li>how to compute end-effector velocity from known joint velocities,</li>
+<li>how to compute joint velocities needed for a desired Cartesian motion,</li>
+<li>whether the robot is near a singularity,</li>
+<li>how dexterous the robot is at a given pose,</li>
+<li>and later, how forces and torques are related.</li>
+</ol>
+<p>So, while forward kinematics tells us <strong>where</strong> the robot is, the Jacobian tells us <strong>how it moves locally</strong> around its current configuration.</p>
+<hr />
+<h2 id="3-forward-velocity-kinematics">3. Forward Velocity Kinematics</h2>
+<p>Forward velocity kinematics computes the end-effector velocity from known joint velocities.</p>
+<p>If the robot joint velocity vector is known:</p>
+<div class="arithmatex">\[
+\dot{q}
+\]</div>
+<p>then the end-effector velocity is computed as:</p>
+<div class="arithmatex">\[
+\nu = J(q)\dot{q}
+\]</div>
+<p>This is the velocity-level equivalent of forward kinematics.</p>
+<h3 id="interpretation">Interpretation</h3>
+<ul>
+<li>Forward kinematics:</li>
+</ul>
+<p>$$
+  q \rightarrow x
+  $$</p>
+<ul>
+<li>Forward velocity kinematics:</li>
+</ul>
+<p>$$
+  \dot{q} \rightarrow \nu
+  $$</p>
+<p>This means that if each motor rotates at a certain speed, the Jacobian tells us the resulting linear and angular velocity of the end-effector.</p>
+<h3 id="practical-meaning">Practical meaning</h3>
+<p>Suppose one joint moves faster than another. The resulting end-effector motion is not always intuitive because each joint contributes differently depending on:</p>
+<ul>
+<li>the robot geometry,</li>
+<li>the current pose,</li>
+<li>and the direction of motion.</li>
+</ul>
+<p>The Jacobian captures all of that in matrix form.</p>
+<hr />
+<h2 id="4-inverse-velocity-kinematics">4. Inverse Velocity Kinematics</h2>
+<p>Inverse velocity kinematics solves the opposite problem.</p>
+<p>Instead of knowing the joint velocities and finding the end-effector velocity, we know the desired end-effector velocity and want to compute the required joint velocities.</p>
+<p>Starting from:</p>
+<div class="arithmatex">\[
+\nu = J(q)\dot{q}
+\]</div>
+<p>we want:</p>
+<div class="arithmatex">\[
+\dot{q} = J^{-1}(q)\nu
+\]</div>
+<p>if the Jacobian is square and invertible.</p>
+<p>This process is called <strong>inverse velocity kinematics</strong>.</p>
+<h3 id="when-the-jacobian-is-invertible">When the Jacobian is invertible</h3>
+<p>If the robot has the same number of controllable velocity outputs as joints, and the Jacobian is nonsingular, then:</p>
+<div class="arithmatex">\[
+\dot{q} = J^{-1}(q)\nu
+\]</div>
+<h3 id="when-the-jacobian-is-not-square">When the Jacobian is not square</h3>
+<p>In many practical cases, the Jacobian is not square or is not invertible. In those cases, the standard inverse cannot be used.</p>
+<p>Instead, we use a <strong>pseudoinverse</strong>, usually the <strong>Moore-Penrose pseudoinverse</strong>:</p>
+<div class="arithmatex">\[
+\dot{q} = J^\dagger(q)\nu
+\]</div>
+<p>This is especially useful when:</p>
+<ul>
+<li>the robot has more joints than required by the task,</li>
+<li>the task controls only part of the end-effector motion,</li>
+<li>or we want a least-squares numerical solution.</li>
+</ul>
+<p>The pseudoinverse is important because it provides a generalized inverse that can be used even when the Jacobian is rectangular.</p>
+<p>Its practical interpretation is:</p>
+<ul>
+<li>if the desired Cartesian velocity can be achieved exactly, it returns a valid joint-velocity solution,</li>
+<li>if multiple solutions exist, it selects the one with minimum joint-velocity norm,</li>
+<li>if an exact solution is not possible, it returns the least-squares solution that minimizes the velocity error.</li>
+</ul>
+<p>Common Moore-Penrose expressions are:</p>
+<div class="arithmatex">\[
+J^\dagger = J^T(JJ^T)^{-1}
+\]</div>
+<p>or</p>
+<div class="arithmatex">\[
+J^\dagger = (J^T J)^{-1}J^T
+\]</div>
+<p>depending on the dimensions and rank of the Jacobian. In general numerical implementations, the pseudoinverse is often computed using singular value decomposition (SVD).</p>
+<p>This is directly related to the iterative IK methods you already studied, because in both cases the Jacobian is used to map between Cartesian behavior and joint-space corrections.</p>
+<h3 id="applications-of-inverse-velocity-kinematics">Applications of inverse velocity kinematics</h3>
+<p>Inverse velocity kinematics is essential when we want the robot to:</p>
+<ul>
+<li>follow a straight Cartesian path,</li>
+<li>move with constant end-effector speed,</li>
+<li>track a desired trajectory,</li>
+<li>or smoothly move from one pose to another.</li>
+</ul>
+<p>Instead of commanding positions one by one, we command <strong>velocity behavior</strong>.</p>
+<hr />
+<h2 id="5-singularities">5. Singularities</h2>
+<p>A <strong>singularity</strong> is a robot configuration where the Jacobian loses rank.</p>
+<p>At such a configuration, the robot loses mobility in one or more directions in Cartesian space.</p>
+<p>Mathematically, a singularity occurs when the Jacobian becomes non-invertible.</p>
+<p>For a square Jacobian, this means:</p>
+<div class="arithmatex">\[
+\det(J) = 0
+\]</div>
+<p>For a more general case, it means the Jacobian rank decreases.</p>
+<h3 id="what-happens-at-a-singularity">What happens at a singularity?</h3>
+<p>At or near a singularity:</p>
+<ul>
+<li>some Cartesian directions become unreachable in velocity,</li>
+<li>the robot loses one or more degrees of freedom locally,</li>
+<li>small Cartesian velocity commands can require extremely large joint velocities,</li>
+<li>numerical solutions become unstable.</li>
+</ul>
+<p>This is why singularities are so important in robotics.</p>
+<h3 id="physical-interpretation">Physical interpretation</h3>
+<p>A singularity does not necessarily mean the robot is broken.</p>
+<p>It means that at that configuration, the robot cannot move equally well in all directions.</p>
+<p>For example, a fully stretched arm may not be able to generate velocity in a certain Cartesian direction even though the motors are still moving.</p>
+<h3 id="applications-of-singularities">Applications of singularities</h3>
+<p>Near singularities:</p>
+<ul>
+<li>joint speeds may become very large,</li>
+<li>actuators may saturate,</li>
+<li>control becomes less reliable,</li>
+<li>trajectory tracking becomes poor.</li>
+</ul>
+<p>So even if a pose is reachable from a position perspective, it may still be problematic from a velocity perspective.</p>
+<hr />
+<h2 id="6-velocity-ellipsoids">6. Velocity Ellipsoids</h2>
+<p>A <strong>velocity ellipsoid</strong> is a geometric tool used to visualize how easily the robot can move in different Cartesian directions at a given pose.</p>
+<div style="text-align:center;">
+  <img src="../Images/Velocity_Ellipsoid.png" alt="Velocity Ellipsoid"
+       style="width:70%;">
+</div>
+
+<p>It is derived from the Jacobian and helps us understand the robot’s <strong>dexterity</strong>.</p>
+<h3 id="interpretation-of-the-ellipsoid">Interpretation of the ellipsoid</h3>
+<ul>
+<li>A <strong>large radius</strong> in a direction means the robot can move easily and quickly in that direction.</li>
+<li>A <strong>small radius</strong> in a direction means the robot has poor mobility in that direction.</li>
+<li>A <strong>very narrow ellipsoid</strong> indicates the robot is close to singularity.</li>
+<li>A <strong>more circular or spherical ellipsoid</strong> indicates more uniform dexterity.</li>
+</ul>
+<p>So the velocity ellipsoid gives a visual representation of how capable the robot is of generating motion in different directions.</p>
+<h3 id="applications-of-velocity-ellipsoids">Applications of velocity ellipsoids</h3>
+<p>Velocity ellipsoids help us:</p>
+<ul>
+<li>visualize dexterity,</li>
+<li>compare configurations,</li>
+<li>detect poor motion directions,</li>
+<li>understand singularities,</li>
+<li>and choose better poses for performing tasks.</li>
+</ul>
+<p>This is especially useful in design, planning, and manipulator analysis.</p>
+<hr />
+<h2 id="7-applications-of-velocity-analysis">7. Applications of Velocity Analysis</h2>
+<p>Velocity is not only a mathematical concept. It is fundamental to real robot behavior.</p>
+<p>In practice, controlling velocities matters for several reasons.</p>
+<h3 id="71-smooth-robot-motion">7.1 Smooth robot motion</h3>
+<p>If we only think in terms of positions, the robot jumps conceptually from one point to another.</p>
+<p>But real robots must move continuously.</p>
+<p>Velocity control allows us to define:</p>
+<ul>
+<li>how fast the robot moves,</li>
+<li>in what direction it moves,</li>
+<li>and how smoothly it transitions between points.</li>
+</ul>
+<p>This is essential for safe and realistic operation.</p>
+<h3 id="72-trajectory-tracking">7.2 Trajectory tracking</h3>
+<p>Trajectory planning does not only define positions.</p>
+<p>A complete trajectory usually includes:</p>
+<div class="arithmatex">\[
+q(t), \quad \dot{q}(t), \quad \ddot{q}(t)
+\]</div>
+<p>or, in Cartesian space:</p>
+<div class="arithmatex">\[
+x(t), \quad \dot{x}(t), \quad \ddot{x}(t)
+\]</div>
+<p>That means velocity is a necessary intermediate step between kinematics and full trajectory generation.</p>
+<p>Without velocity analysis, trajectory planning is incomplete.</p>
+<h3 id="73-actuator-limits">7.3 Actuator limits</h3>
+<p>Motors do not have infinite speed.</p>
+<p>If a Cartesian command requires very large joint velocities, the robot may not be able to execute it.</p>
+<p>This is especially important near singularities.</p>
+<p>So velocity analysis helps determine whether a desired motion is physically feasible.</p>
+<h3 id="74-velocity-actuator-effort-and-motion-feasibility">7.4 Velocity, actuator effort, and motion feasibility</h3>
+<p>Velocity is not only important for describing motion. It also affects how demanding that motion is for the robot.</p>
+<p>In practice, a robot is never asked to move in an abstract mathematical space. Every commanded motion must eventually be produced by real actuators with limited speed, torque, and power.</p>
+<p>For that reason, velocity analysis helps answer questions such as:</p>
+<ul>
+<li>whether a motion is physically feasible,</li>
+<li>whether the required joint rates are too large,</li>
+<li>whether the robot is moving near a problematic configuration,</li>
+<li>and whether a desired path can be followed smoothly.</li>
+</ul>
+<p>This is especially important near singularities, where even a small Cartesian velocity may require very large joint velocities. In such cases, the motion may be mathematically defined but difficult or impossible to execute safely on the real robot.</p>
+<p>Velocity is also closely related to actuator effort. In later analysis, torque requirements will depend not only on robot position, but also on how fast the joints move and how quickly that motion changes. For this reason, differential kinematics is an essential step in understanding both motion quality and motion feasibility.</p>
+<hr />
+<h2 id="8-velocity-in-trajectory-generation">8. Velocity in trajectory generation</h2>
+<p>A robot trajectory is not just a sequence of positions.</p>
+<p>To move smoothly from one configuration to another, the robot must follow a motion that evolves over time. That means a complete trajectory must include not only position, but also velocity, and often acceleration.</p>
+<p>This makes velocity a fundamental part of trajectory generation.</p>
+<p>When a path is defined in Cartesian space, the Jacobian allows us to determine what joint velocities are required to produce that motion. In this way, differential kinematics connects the desired motion of the end-effector with the actual motion that must occur at the joints.</p>
+<p>This is essential for generating motions that are:</p>
+<ul>
+<li>smooth,</li>
+<li>feasible,</li>
+<li>safe,</li>
+<li>and compatible with actuator limits.</li>
+</ul>
+<p>Without velocity analysis, it is possible to define a path geometrically but still have no guarantee that the robot can follow it properly.</p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.tooltips", "toc.integrate", "navigation.sections"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+      
+    
+  </body>
+</html>

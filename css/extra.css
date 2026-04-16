@@ -1,0 +1,71 @@
+/* Only tables you tag with .wrap-cols will be affected */
+.md-typeset table.wrap-cols {
+  table-layout: fixed;
+  width: 100%;
+}
+.md-typeset table.wrap-cols th,
+.md-typeset table.wrap-cols td {
+  white-space: normal;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Widths per column for this specific table */
+.md-typeset table.wrap-cols th:nth-child(1),
+.md-typeset table.wrap-cols td:nth-child(1) { width: 18%; }
+.md-typeset table.wrap-cols th:nth-child(2),
+.md-typeset table.wrap-cols td:nth-child(2) { width: 52%; }
+.md-typeset table.wrap-cols th:nth-child(3),
+.md-typeset table.wrap-cols td:nth-child(3) { width: 30%; }
+
+
+/* Only tables tagged with .centered-table will be centered */
+.md-typeset table.centered-table {
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  max-width: 100%;
+  table-layout: fixed; /* if you want wrapping */
+}
+.md-typeset table.centered-table th,
+.md-typeset table.centered-table td {
+  white-space: normal;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Center a whole block and its headings/tables */
+.md-typeset .center-block { text-align: center; }
+.md-typeset .center-block table { margin-left: auto; margin-right: auto; }
+
+/* Optional: also center table cell text (remove if you want left/right alignment in cells) */
+.md-typeset .center-block table th,
+.md-typeset .center-block table td { text-align: center; }
+
+/* Center the table itself and (optionally) its cell content */
+.md-typeset table.center-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav-row {
+  display: flex;
+  align-items: center;
+}
+
+/* Pages that have both buttons */
+.nav-row--before-after {
+  justify-content: space-between;  /* Before left, After right */
+}
+
+/* Pages that only have an After/Next button */
+.nav-row--only-after {
+  justify-content: flex-end;       /* Push button to the right */
+}
+
+/* Pages that only have an After/Next button */
+.nav-row--only-before {
+  justify-content: flex-start;       /* Push button to the left */
+}
+
+

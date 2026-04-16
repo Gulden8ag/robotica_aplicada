@@ -1,0 +1,2763 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../T0_1/">
+      
+      
+        <link rel="next" href="../T0_3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Inverse kinematics - Applied Robotics (12224)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.2/css/all.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+      <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#inverse-kinematics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Applied Robotics (12224)" class="md-header__button md-logo" aria-label="Applied Robotics (12224)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Applied Robotics (12224)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Inverse kinematics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Applied Robotics (12224)" class="md-nav__button md-logo" aria-label="Applied Robotics (12224)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Applied Robotics (12224)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applied Robotics (12224)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course Overview
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Course Overview
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course_Overview/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syllabus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course_Overview/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Example Documentation 
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course_Overview/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources for class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M0 Fundamentals and Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M0 Fundamentals and Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Taxonomies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Degrees of Freedom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration space (C-space) vs Workspace (W-space)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Constraints in Robotics — Holonomic, Non-holonomic, and Pfaffian Form
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install and configure ROS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T0_9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ros2 Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First Program in ROS 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Create a Service Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Create a Service Client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS2 Jazzy — Custom Interface Message
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Custom Service Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Parameters in Python Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M0_Fundamentals_and_Tools/T1_7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS 2 Jazzy — Launch Files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M1 Manipulator Kinematics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M1 Manipulator Kinematics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spatial Descriptions and Transformations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forward Kinematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inverse kinematics
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inverse kinematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-solvability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Solvability
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Solvability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-existence-reachability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Existence (reachability)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-degree-of-freedom-count" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Degree-of-freedom count
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-singularity-and-solvability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Singularity and solvability
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-the-notion-of-manipulator-subspace-when-n-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. The Notion of Manipulator Subspace When \(n &lt; 6\)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. The Notion of Manipulator Subspace When \(n &lt; 6\)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-practical-interpretation-for-3-dof-arms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Practical interpretation for 3-DOF arms
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-solution-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Solution Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Solution Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-geometric-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Geometric approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-algebraic-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Algebraic approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-algebraic-solution-by-reduction-to-a-polynomial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Algebraic Solution by Reduction to a Polynomial
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Algebraic Solution by Reduction to a Polynomial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-example-3-dof-planar-arm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Example: 3-DOF planar arm
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-geometric-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Geometric Solution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Geometric Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-example-3-dof-planar-arm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Example: 3-DOF planar arm
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-numerical-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Numerical Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Numerical Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-orientation-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Orientation error
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-linearization-and-jacobian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Linearization and Jacobian
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-example-2-dof-planar-arm-for-jacobian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Example 2-DOF planar arm for jacobian
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-implementation-of-numerical-ik-using-jacobian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 Implementation of numerical IK using Jacobian
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8 Implementation of numerical IK using Jacobian">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-gradient-descent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Gradient descent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-gauss-newton-gn-for-least-squares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Gauss-Newton (GN) for least-squares
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-levenberg-marquardt-lm-damped-least-squaresdls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Levenberg-Marquardt (LM) / Damped Least Squares(DLS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-geometric-jacobian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Geometric Jacobian
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Geometric Jacobian">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-understanding-the-matrix-notation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Understanding the Matrix Notation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-interpretation-of-the-geometric-jacobian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Interpretation of the Geometric Jacobian
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Numerical IK from DH Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RViz2 and TF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    URDF Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../T1_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    URDF Joints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M2 Dynamics and Control
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M2 Dynamics and Control
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M2_Dynamics_and_Control/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differential Kinematics and the Jacobian
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M2_Dynamics_and_Control/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gazebo + ROS 2 Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M2_Dynamics_and_Control/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gazebo IK Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M3 Trajectory planning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M3 Trajectory planning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M3_Trajectory_planning/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning I
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M3_Trajectory_planning/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning II: Linear Cartesian Trajectories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M3_Trajectory_planning/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M3_Trajectory_planning/T0_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning Joint-Space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M3_Trajectory_planning/T0_5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning Cartesian Trajectory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M3_Trajectory_planning/T0_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory Planning — Homework: Multi-Pose Trajectories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M4 Mobile Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M4 Mobile Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M4_Mobile_Fundamentals/T0_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Kinematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M4_Mobile_Fundamentals/T0_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Navigation with ROS 2 and Nav2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M4_Mobile_Fundamentals/T0_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Simulation with Gazebo and ros2_control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    M6 Integration and validation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    M6 Integration and validation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M6_Integration_and_validation/T6_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    T6 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../M6_Integration_and_validation/T6_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot Project Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="inverse-kinematics">Inverse kinematics</h1>
+<h2 id="introduction">Introduction</h2>
+<p>In the previous section, we have derived the forward kinematics of the M1 manipulator. In this section, we will derive the inverse kinematics of the M1 manipulator. The inverse kinematics is the process of finding the joint angles given the end-effector position and orientation.</p>
+<h2 id="1-introduction">1. Introduction</h2>
+<p><strong>Inverse kinematics (IK)</strong> answers:</p>
+<blockquote>
+<p>Given a desired end-effector pose, find the joint variables that achieve it.</p>
+</blockquote>
+<ul>
+<li><strong>Forward kinematics (FK):</strong>  </li>
+</ul>
+<p>$$
+    q \;\longrightarrow\; {}^{0}_{n}T(q) 
+  $$</p>
+<ul>
+<li><strong>Inverse kinematics (IK):</strong>  </li>
+</ul>
+<p>$$
+  {}^{0}_{n}T_d \;\longrightarrow\; q
+  $$</p>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\(q \in \mathbb{R}^n\)</span> are joint variables (angles for revolute joints, displacements for prismatic joints).</li>
+<li><span class="arithmatex">\({}^{0}T_n \in SE(3)\)</span> is the homogeneous transform of the end-effector frame <span class="arithmatex">\(\{n\}\)</span> relative to base frame <span class="arithmatex">\(\{0\}\)</span>.</li>
+</ul>
+<div style="text-align:center;">
+  <img src="../Images/FK_diagram.png" alt="D-H Parameters"
+       style="width:70%;">
+</div>
+
+<p><strong>Why IK is hard</strong></p>
+<ul>
+<li>The mapping is <strong>nonlinear</strong>.</li>
+<li>Solutions may be <strong>none</strong>, <strong>unique</strong>, <strong>finite multiple</strong>, or <strong>infinite</strong>.</li>
+<li>Constraints matter: joint limits, collisions, singularities, actuator limits.</li>
+</ul>
+<h2 id="2-solvability">2. Solvability</h2>
+<p>IK solvability asks two questions:</p>
+<ol>
+<li><strong>Existence:</strong> does at least one <span class="arithmatex">\(q\)</span> satisfy the desired pose?</li>
+<li><strong>Multiplicity:</strong> if yes, how many solutions exist?</li>
+</ol>
+<h3 id="21-existence-reachability">2.1 Existence (reachability)</h3>
+<p>A pose is feasible only if it lies in the robot’s <strong>reachable set</strong>:</p>
+<ul>
+<li><strong>Position reachability:</strong> the point must lie in the robot workspace (consider link lengths and joint limits).</li>
+<li><strong>Orientation reachability:</strong> the robot must be able to realize the desired orientation given its joint structure.</li>
+</ul>
+<div style="text-align:center;">
+  <img src="../Images/reachable_ws.png" alt="Reachable Workspace"
+       style="width:70%;">
+</div>
+
+<p>Reachability can be checked with necessary conditions before attempting IK, this isn't a guarantee of a solution but can quickly rule out impossible targets to filter out bad targets and save computation time. As the only way to know for sure if a solution exists is to try to solve the IK.</p>
+<ol>
+<li><strong>Position reachability:</strong> check if the desired position is within the workspace (e.g., within a sphere of radius equal to the sum of link lengths).</li>
+</ol>
+<p>Let the desired end effector position in the base frame be:</p>
+<div class="arithmatex">\[
+p_d = \begin{bmatrix}p_x^d \\ p_y^d \\ p_z^d\end{bmatrix}
+\]</div>
+<p>$$
+\rho = ||p_d - p_0|| = \sqrt{(p_{d,x} - p_{0x})^2 + (p_{d,y} - p_{0y})^2 + (p_{d,z} - p_{0z})^2} 
+$$
+Where <span class="arithmatex">\(p_0\)</span> is the position of the base frame. </p>
+<p>If the manipulator has link lengths L1, L2, ..., Ln, then a necessary condition (ignoring joint limits and offsets) is:</p>
+<ul>
+<li>Maximum reach: </li>
+</ul>
+<div class="arithmatex">\[
+\rho \leq \sum_{i=1}^{n} L_i 
+\]</div>
+<p>Where <span class="arithmatex">\(L_i\)</span> is the length of the i-th link. This means that the desired position must be within a sphere centered at the base with radius equal to the sum of the link lengths.</p>
+<ul>
+<li>Minimum reach (if the robot cannot fold onto itself):</li>
+</ul>
+<div class="arithmatex">\[
+    \rho \geq max(0, L_{max} - \sum_{i \neq max} L_i) \\
+    \]</div>
+<p>Where <span class="arithmatex">\(L_{max}\)</span> is the length of the longest link. This means that the desired position must be outside a sphere centered at the base with radius equal to the difference between the longest link and the sum of the other links.</p>
+<h3 id="22-degree-of-freedom-count">2.2 Degree-of-freedom count</h3>
+<p>A full 3D pose has <strong>6 independent constraints</strong> (3 position + 3 orientation).</p>
+<ul>
+<li>If <span class="arithmatex">\(n &lt; 6\)</span>: cannot generally achieve an arbitrary pose in 3D; only a subset is reachable.</li>
+<li>If <span class="arithmatex">\(n = 6\)</span>: can potentially achieve a general pose (subject to geometry/singularities).</li>
+<li>If <span class="arithmatex">\(n &gt; 6\)</span>: <strong>redundant</strong>; infinitely many solutions may exist for a given pose.</li>
+</ul>
+<div style="display:flex; gap:24px; align-items:center;">
+    <!-- Column 1 -->
+    <div style="flex:1; text-align:center;">
+    <img src="../Images/num_sol.png" alt="D-H Parameters"
+       style="width:90%;">
+    </div >
+    <!-- Column 2 -->
+    <div style="flex:1; text-align:center;">
+    <img src="../Images/example_multSol.png" alt="D-H Parameters"
+       style="width:90%;">
+    </div >
+</div>
+
+<h3 id="23-singularity-and-solvability">2.3 Singularity and solvability</h3>
+<p>Even with <span class="arithmatex">\(n \ge 6\)</span>, solutions may fail or become numerically unstable near <a href="https://robodk.com/blog/robot-singularities/"><strong>singularities</strong></a>. A singularity is a specific, problematic configuration of a robot arm where the mechanical joints align in a way that causes the robot to lose one or more degrees of freedom</p>
+<p>Using the Jacobian <span class="arithmatex">\(J(q)\)</span>:</p>
+<ul>
+<li>At a singular configuration, <span class="arithmatex">\(\mathrm{rank}(J) &lt; \min(6,n)\)</span>.</li>
+<li>Near singularities, small end-effector motions may require very large joint motions.</li>
+</ul>
+<hr />
+<h2 id="3-the-notion-of-manipulator-subspace-when-n-6">3. The Notion of Manipulator Subspace When <span class="arithmatex">\(n &lt; 6\)</span></h2>
+<p>When <span class="arithmatex">\(n &lt; 6\)</span>, the robot cannot (in general) control all 6 pose components. Instead, it controls a <strong>subspace</strong> of task variables.</p>
+<h3 id="31-practical-interpretation-for-3-dof-arms">3.1 Practical interpretation for 3-DOF arms</h3>
+<p>A 3-DOF articulated arm often aims for:</p>
+<ul>
+<li><strong>Position-only control:</strong> <span class="arithmatex">\((x,y,z)\)</span> with no full orientation control, or</li>
+<li><strong>Planar tasks:</strong> <span class="arithmatex">\((x,z)\)</span> + one angle, etc.</li>
+</ul>
+<p><strong>Design implication:</strong> choose a task consistent with available DOF, e.g.:</p>
+<ul>
+<li>Solve IK for <strong>position</strong> only.</li>
+<li>Fix a desired orientation (or part of it) and solve the remaining.</li>
+</ul>
+<hr />
+<h2 id="4-solution-methods">4. Solution Methods</h2>
+<blockquote>
+<blockquote>
+<p>Assuming the target pose is within the robot's reachable workspace, a 6-DOF manipulator will have at least one valid joint configuration to achieve that pose, and often several.</p>
+</blockquote>
+</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Note</p>
+<p>This only applies to numerical methods, as analytical and geometric methods may have multiple solutions or no solution at all depending on the manipulator's configuration and the desired end-effector pose. </p>
+</div>
+<ul>
+<li>
+<p><strong>Algebraic methods(Closed Loop):</strong> These methods involve deriving closed-form equations for the joint angles based on the end-effector position and orientation. They are computationally efficient but may not always be possible for complex manipulators.</p>
+</li>
+<li>
+<p><strong>Numerical methods:</strong> These methods involve iterative algorithms to find the joint angles that minimize the error between the desired and actual end-effector position and orientation. They are more flexible but can be computationally expensive.</p>
+</li>
+<li>
+<p><strong>Geometric methods(Closed Loop):</strong> These methods involve using geometric relationships between the joints and the end-effector to derive the joint angles. They can be computationally efficient but may not always be possible for complex manipulators.</p>
+</li>
+</ul>
+<h3 id="41-geometric-approach">4.1 Geometric approach</h3>
+<p>Uses geometry and trigonometry:</p>
+<ul>
+<li>Project a 3D problem into a plane.</li>
+<li>Build triangles with known link lengths.</li>
+<li>Apply law of cosines/sines and angle addition rules.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+<li>Intuitive.</li>
+<li>Often yields multiple solutions explicitly (e.g., elbow-up/down).</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li>Depends strongly on a convenient geometry.</li>
+<li>Becomes messy with offsets and non-intersecting axes.</li>
+</ul>
+<h3 id="42-algebraic-approach">4.2 Algebraic approach</h3>
+<p>Uses equations from homogeneous transforms:</p>
+<ul>
+<li>Write <span class="arithmatex">\({}^{0}_{n}T(q) = {}^{0}_{n}T_d\)</span></li>
+<li>Equate matrix elements, producing nonlinear equations in joint variables.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+<li>Systematic.</li>
+<li>Can be applied even when geometry is not visually simple.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li>Can lead to high-degree polynomials and many extraneous solutions.</li>
+<li>Requires careful handling of trigonometric identities.</li>
+</ul>
+<h2 id="5-algebraic-solution-by-reduction-to-a-polynomial">5. Algebraic Solution by Reduction to a Polynomial</h2>
+<p>A common algebraic workflow:</p>
+<ol>
+<li>
+<p>Start from:</p>
+<div class="arithmatex">\[
+{}^{0}_{n}\!T(q) = {}^{0}_{n}\!T_d
+\]</div>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\({}^{0}_{n}\!T(q)\)</span> is the forward kinematics transform expressed in terms of joint variables <span class="arithmatex">\(q\)</span>.</li>
+<li><span class="arithmatex">\({}^{0}_{n}\!T_d\)</span> is the desired end-effector pose (position + orientation).</li>
+</ul>
+</li>
+<li>
+<p>Equate entries of the rotation matrix and position vector.</p>
+<div class="arithmatex">\[
+{}^{0}_{n}\!T(q)=
+\begin{bmatrix}
+{}^{0}_{n}\!R(q) &amp; {}^{0}\!p_n(q) \\
+0\;0\;0 &amp; 1
+\end{bmatrix},
+\qquad
+{}^{0}_{n}\!T_d=
+\begin{bmatrix}
+R_d &amp; p_d \\
+0\;0\;0 &amp; 1
+\end{bmatrix}.
+\]</div>
+</li>
+</ol>
+<p>which we can break down into:</p>
+<div class="arithmatex">\[
+{}^{0}_{n}\!R(q) = R_d, \qquad {}^{0}\!p_n(q) = p_d
+\]</div>
+<p>If we expand these:</p>
+<div class="arithmatex">\[
+{}^{0}_{n}\!R(q) = \begin{bmatrix}r_{11}(q) &amp; r_{12}(q) &amp; r_{13}(q) \\ r_{21}(q) &amp; r_{22}(q) &amp; r_{23}(q) \\ r_{31}(q) &amp; r_{32}(q) &amp; r_{33}(q)\end{bmatrix} = \begin{bmatrix}r_{11}^d &amp; r_{12}^d &amp; r_{13}^d \\ r_{21}^d &amp; r_{22}^d &amp; r_{23}^d \\ r_{31}^d &amp; r_{32}^d &amp; r_{33}^d\end{bmatrix}
+\]</div>
+<p>and</p>
+<div class="arithmatex">\[
+{}^{0}_n\!p(q) = \begin{bmatrix}p_x(q) \\ p_y(q) \\ p_z(q)\end{bmatrix} = \begin{bmatrix}p_x^d \\ p_y^d \\ p_z^d\end{bmatrix}
+\]</div>
+<p>To finally equate the elements</p>
+<p>Position equations:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+p_x(q) &amp;= p_x^d \\
+p_y(q) &amp;= p_y^d \\ 
+p_z(q) &amp;= p_z^d
+\end{aligned}
+\]</div>
+<p>Orientation equations, where a standard approach is to use 3 equations from rotation using one column (or two columns) of R.</p>
+<ol>
+<li>Use identities such as:
+   $$
+   \sin^2\theta + \cos^2\theta = 1
+   $$</li>
+<li>
+<p>Convert trig equations into a single variable using substitutions, e.g.:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+t &amp;= \tan(\theta/2),\\
+\sin\theta &amp;= \frac{2t}{1+t^2},\\
+\cos\theta &amp;= \frac{1-t^2}{1+t^2}.
+\end{aligned}
+\]</div>
+</li>
+<li>
+<p>Reduce to a polynomial in <span class="arithmatex">\(t\)</span>.</p>
+</li>
+<li>Solve the polynomial to obtain candidate <span class="arithmatex">\(\theta\)</span>, then back-substitute to find remaining joints.</li>
+</ol>
+<h3 id="51-example-3-dof-planar-arm">5.1 Example: 3-DOF planar arm</h3>
+<div style="text-align:center;">
+  <img src="../Images/example_robot.png" alt="Example 3-DOF Planar Arm"
+       style="width:70%;">
+</div>
+<div style="text-align:center;">
+  <img src="../Images/Example_algebraic.png" alt="Example 3-DOF Equations"
+       style="width:70%;">
+</div>
+
+<h2 id="6-geometric-solution">6. Geometric Solution</h2>
+<p>A common geometric workflow:</p>
+<ol>
+<li>Identify a plane of motion (e.g., the plane formed by the first three joints).</li>
+<li>Project the desired end-effector pose onto this plane.</li>
+<li>Use the projected position to form triangles with known link lengths.</li>
+<li>Apply the law of cosines/sines to solve for joint angles.</li>
+</ol>
+<div style="text-align:center;">
+  <img src="../Images/laws_cosinessines.png" alt="Law of Cosines and Sines"
+       style="width:70%;">
+</div>
+
+<h3 id="61-example-3-dof-planar-arm">6.1 Example: 3-DOF planar arm</h3>
+<div style="display:grid; grid-template-columns: 1.5fr 1fr; gap:15px; align-items:start;">
+  <div style="text-align:center;">
+    <img src="../Images/example_2_2.png" alt="Example 3-DOF Planar Arm"
+         style="width:100%; max-width:700px;">
+  </div>
+
+  <div>
+    $$
+    \begin{gather}
+    h_1^2 &= X^0_2 + Y^0_2 \\
+    \phi_2 &= \tan^{-1}\left(\frac{Y^0_2}{X^0_2}\right) \\
+    a_4^2 &= h_1^2 + a_2^2 - 2h_1a_2\cos(\phi_2) \\
+    h_1^2 &= a_4^2 + a_2^2 - 2a_4a_2\cos(\phi_3) \\
+    \theta_1 &= \phi_2 - \phi_1 \\
+    \theta_2 &= \pi - \phi_3
+    \end{gather}
+    $$
+  </div>
+</div>
+
+<h2 id="7-numerical-methods">7. Numerical Methods</h2>
+<p>Closed-form IK is fast and exact when the robot geometry allows it. However, many real manipulators include offsets, non-intersecting axes, tool transforms, or constraints that make a closed-form solution difficult or impossible. <strong>Numerical IK</strong> treats IK as an iterative problem: start from a guess and improve it until the pose error is sufficiently small.</p>
+<p>Let the desired end-effector pose be:</p>
+<div class="arithmatex">\[
+{}^{0}T_n(q) =
+\begin{bmatrix}
+R_d &amp; p_d\\
+0 &amp; 1
+\end{bmatrix}
+\]</div>
+<p>and the current pose from FK be:</p>
+<div class="arithmatex">\[
+{}^{0}T_n(q) =
+\begin{bmatrix}
+R(q) &amp; p(q)\\
+0 &amp; 1
+\end{bmatrix}
+\]</div>
+<p>We define the pose error as:</p>
+<p>Position error(Typical for <em>n</em>&lt;6):</p>
+<div class="arithmatex">\[
+e(q) = p_d - p(q)
+\]</div>
+<p>Full pose IK(<em>n</em>≥6):</p>
+<div class="arithmatex">\[
+e(q) = \begin{bmatrix}
+p_d - p(q) \\
+e_w(R_d, R(q))
+\end{bmatrix}
+\]</div>
+<p>Where <span class="arithmatex">\(e_w\)</span> is a function that measures the orientation error between the desired and current rotation matrices (e.g., using axis-angle representation).</p>
+<p>Aiming to find:</p>
+<div class="arithmatex">\[
+q^* = \arg\min_q \|e(q)\|^2
+\]</div>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\(q^*\)</span> is the optimal joint configuration that minimizes the pose error.</li>
+<li><span class="arithmatex">\(e(q)\)</span> the task-space error produced by using joints q. It depends on FK.</li>
+<li><span class="arithmatex">\(\|e(q)\|^2\)</span> is the squared norm of the error, which we want to minimize. Squaring emphasizes larger errors and ensures a non-negative cost.</li>
+</ul>
+<h3 id="71-orientation-error">7.1 Orientation error</h3>
+<p>When orientation is included, we need a minimal 3-parameter error. A common choice is based on the rotation matrix error:</p>
+<div class="arithmatex">\[
+e_w=\frac{1}{2}\begin{bmatrix}r_{32}-r_{23} \\
+r_{13}-r_{31} \\
+r_{21}-r_{12}\end{bmatrix}
+\]</div>
+<h3 id="72-linearization-and-jacobian">7.2 Linearization and Jacobian</h3>
+<p>A Jacobian is a matrix of all first-order partial derivatives of a vector-valued function, representing the best linear approximation of a function at a given point. It acts as a multivariate derivative, measuring how a change in input variables scales or distorts space in coordinate transformations.</p>
+<p>Your forward kinematics gives a mapping from joints to end-effector position (or pose).
+In this context the Jacobian is the matrix of partial derivatives that tells you how sensitive the end-effector is to each joint:</p>
+<div class="arithmatex">\[
+J_p(q) = \frac{\partial p}{\partial q} = \begin{bmatrix}\frac{\partial p_x}{\partial q_1} &amp; \cdots &amp; \frac{\partial p_x}{\partial q_n} \\
+\frac{\partial p_y}{\partial q_1} &amp; \cdots &amp; \frac{\partial p_y}{\partial q_n} \\
+\frac{\partial p_z}{\partial q_1} &amp; \cdots &amp; \frac{\partial p_z}{\partial q_n}\end{bmatrix}
+\]</div>
+<p>which would mean that if i move q_i tiny bit, which direction does the end-effector move, and by how much.</p>
+<h3 id="73-example-2-dof-planar-arm-for-jacobian">7.3 Example 2-DOF planar arm for jacobian</h3>
+<p>Let's suppose we have a robotic arm with two joints (θ1, θ2) and two links (l1, l2). The position of the end-effector in Cartesian coordinates is given by:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+p_x &amp;= l_1 \cos(\theta_1) + l_2 \cos(\theta_1 + \theta_2) \\
+p_y &amp;= l_1 \sin(\theta_1) + l_2 \sin(\theta_1 + \theta_2)
+\end{aligned}
+\]</div>
+<p>Define:</p>
+<div class="arithmatex">\[
+q = \begin{bmatrix} \theta_1 \\ \theta_2 \end{bmatrix}, \quad p = \begin{bmatrix} p_x \\ p_y \end{bmatrix}
+\]</div>
+<p>The position Jacobian <span class="arithmatex">\(J_p(q)=\frac{\partial p}{\partial q}\)</span> for this system is:</p>
+<div class="arithmatex">\[
+J_p(q) = \begin{bmatrix}
+\frac{\partial p_x}{\partial \theta_1} &amp; \frac{\partial p_x}{\partial \theta_2} \\ 
+\frac{\partial p_y}{\partial \theta_1} &amp; \frac{\partial p_y}{\partial \theta_2}
+\end{bmatrix} = \begin{bmatrix}
+-l_1 \sin(\theta_1) - l_2 \sin(\theta_1 + \theta_2) &amp; -l_2 \sin(\theta_1 + \theta_2) \\
+l_1 \cos(\theta_1) + l_2 \cos(\theta_1 + \theta_2) &amp; l_2 \cos(\theta_1 + \theta_2)
+\end{bmatrix}
+\]</div>
+<p>This jacobian provide the local mapping:</p>
+<div class="arithmatex">\[
+\triangle p = J_p(q) \triangle q
+\]</div>
+<p>and por small changes:</p>
+<div class="arithmatex">\[
+\triangle p \approx J_p(q) \triangle q
+\]</div>
+<p>Giving us the following interpretation:</p>
+<ul>
+<li>A small change in θ1 will affect both px and py, as it influences the position of both links.</li>
+<li>A small change in θ2 affects both px and py, by moving only the second link relative to the first, with the effect depending on the current configuration (θ1 and θ2).</li>
+</ul>
+<h2 id="8-implementation-of-numerical-ik-using-jacobian">8 Implementation of numerical IK using Jacobian</h2>
+<p>To solve IK numerically, we can use the Jacobian to iteratively update our joint angles, and we must assume that we have:</p>
+<ul>
+<li>Forward kinematics (FK) to compute the current end-effector output <span class="arithmatex">\(p(q)\)</span></li>
+<li>A desied target pose for the end-effector <span class="arithmatex">\(p_d\)</span></li>
+<li>An error definition <span class="arithmatex">\(e(q) = p_d - p(q)\)</span></li>
+<li>The Jacobian <span class="arithmatex">\(J(q)=\frac{\partial e}{\partial q}\)</span> (often <span class="arithmatex">\(J \approx -\frac{\partial p}{\partial q}\)</span>; the sign does not matter if you keep it consistent)</li>
+</ul>
+<p>We will solve IK by iteratively updating:</p>
+<div class="arithmatex">\[
+q \leftarrow q +    \triangle q
+\]</div>
+<h3 id="81-setup">8.1 Setup</h3>
+<p>Choose the task
+- Position-only
+- Full pose</p>
+<p>Define Objective</p>
+<div class="arithmatex">\[
+q^* = \arg\min_q \|e(q)\|^2 \text{ with } e(q) = p_d - p(q)
+\]</div>
+<p>Stopping conditions</p>
+<ul>
+<li><span class="arithmatex">\(\|e(q)\| &lt; \epsilon\)</span> (pose error is small enough)</li>
+<li>Maximum iterations reached</li>
+<li>No improvements for N iterations </li>
+</ul>
+<p>Safety Constraints</p>
+<ul>
+<li>Joint limits: <span class="arithmatex">\(q_{min} \le q \le q_{max}\)</span></li>
+<li>Step size limits: <span class="arithmatex">\(\|\triangle q\| &lt; \triangle q_{max}\)</span> </li>
+</ul>
+<h3 id="82-gradient-descent">8.2 Gradient descent</h3>
+<p>This is the simplest approach, but can be slow and get stuck in local minimum. </p>
+<p>Update rule:</p>
+<p>Let the cost be <span class="arithmatex">\(f(q) = \frac{1}{2}\|e(q)\|^2\)</span>. Then:</p>
+<div class="arithmatex">\[
+\nabla f = J^T e
+\]</div>
+<p>Gradient descent uses:</p>
+<div class="arithmatex">\[
+\triangle q = \alpha J^T e
+\]</div>
+<p>Where <span class="arithmatex">\(\alpha\)</span> is a step size parameter that controls how big of a step we take in the direction of the negative gradient.</p>
+<p>Implementation plan:</p>
+<ol>
+<li>Compute current end-effector pose: <span class="arithmatex">\(p(q)\)</span> via FK.</li>
+<li>Compute error: <span class="arithmatex">\(e(q) = p_d - p(q)\)</span>.</li>
+<li>Compute Jacobian: <span class="arithmatex">\(J(q)\)</span>.</li>
+<li>Compute update: <span class="arithmatex">\(\triangle q = \alpha J^T e\)</span>.</li>
+<li>Limit <span class="arithmatex">\(\triangle q\)</span> and apply joint limits </li>
+<li>Update joints: <span class="arithmatex">\(q \leftarrow q + \triangle q\)</span>.</li>
+<li>Check stopping conditions and repeat.</li>
+</ol>
+<p>Pros: simple and easy to implement.
+Cons: can be slow, sensitive near singularities</p>
+<h3 id="83-gauss-newton-gn-for-least-squares">8.3 Gauss-Newton (GN) for least-squares</h3>
+<p>Gauss–Newton is the standard least-squares solver for nonlinear problems. It approximates the second-order curvature using only the Jacobian.</p>
+<p>Update rule:</p>
+<p>Solve the normal equations:</p>
+<div class="arithmatex">\[
+(J^T J) \triangle q = J^T e
+\]</div>
+<p>Then update:</p>
+<div class="arithmatex">\[
+q \leftarrow q + \triangle q
+\]</div>
+<p>Implementation plan:</p>
+<ol>
+<li>Compute current end-effector pose: <span class="arithmatex">\(p(q)\)</span> via FK.</li>
+<li>Compute error: <span class="arithmatex">\(e(q) = p_d - p(q)\)</span>.</li>
+<li>Compute Jacobian: <span class="arithmatex">\(J(q)\)</span>.</li>
+<li>Form <span class="arithmatex">\(A = J^T J\)</span> and <span class="arithmatex">\(b = J^T e\)</span>. Here  we use the transpose <span class="arithmatex">\(J^T\)</span> instead of the inverse <span class="arithmatex">\(J^{-1}\)</span> because <span class="arithmatex">\(J\)</span> is rarely square.</li>
+<li>Solve linear system <span class="arithmatex">\(A \triangle q = b\)</span> for <span class="arithmatex">\(\triangle q\)</span> (e.g., using Cholesky or SVD).</li>
+<li>Limit <span class="arithmatex">\(\triangle q\)</span> and apply joint limits.</li>
+<li>Update joints: <span class="arithmatex">\(q \leftarrow q + \triangle q\)</span>.</li>
+<li>Check stopping conditions and repeat.</li>
+</ol>
+<p>Pros: faster convergence than gradient descent, especially near the solution.
+Cons: can be unstable if <span class="arithmatex">\(J^T J\)</span> is near-singular</p>
+<h3 id="84-levenberg-marquardt-lm-damped-least-squaresdls">8.4 Levenberg-Marquardt (LM) / Damped Least Squares(DLS)</h3>
+<p>LM is Gauss-Newton plus damping for stability. </p>
+<p>Update rule:</p>
+<div class="arithmatex">\[
+(J^T J + \lambda I) \triangle q = J^T e
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\lambda\)</span> is damping</li>
+<li>Larger <span class="arithmatex">\(\lambda\)</span> → more stable, smaller steps.</li>
+<li>Smaller <span class="arithmatex">\(\lambda\)</span> → faster, closer to GN.</li>
+</ul>
+<p>Implementation plan:</p>
+<ol>
+<li>Compute current end-effector pose: <span class="arithmatex">\(p(q)\)</span> via FK.</li>
+<li>Compute error: <span class="arithmatex">\(e(q) = p_d - p(q)\)</span>.</li>
+<li>Compute Jacobian: <span class="arithmatex">\(J(q)\)</span>.</li>
+<li>Form either:<ul>
+<li>LM: <span class="arithmatex">\(A = J^T J + \lambda I\)</span>, <span class="arithmatex">\(b = J^T e\)</span> solve <span class="arithmatex">\(A \triangle q = b\)</span>.</li>
+<li>DLS: <span class="arithmatex">\(A = J J^T + \lambda^2 I\)</span>, solve <span class="arithmatex">\(Ay = e\)</span>  then <span class="arithmatex">\(\triangle q = J^T y\)</span>.</li>
+</ul>
+</li>
+<li>Limit <span class="arithmatex">\(\triangle q\)</span> and apply joint limits.</li>
+<li>Update joints: <span class="arithmatex">\(q \leftarrow q + \triangle q\)</span>.</li>
+<li>Check stopping conditions and repeat.</li>
+</ol>
+<blockquote>
+<blockquote>
+<p>Start with <span class="arithmatex">\(\lambda_0\)</span> (0.01 to 0.1) if error decreases, <span class="arithmatex">\(\lambda \leftarrow \lambda / 2\)</span>, else <span class="arithmatex">\(\lambda \leftarrow \lambda * 2\)</span>.</p>
+</blockquote>
+</blockquote>
+<p>Pros: more robust than GN, can handle singularities better.
+Cons: requires tuning <span class="arithmatex">\(\lambda\)</span>, too large <span class="arithmatex">\(\lambda\)</span> can be slower than GN.</p>
+<blockquote>
+<blockquote>
+<p>There's other methos like Newton-Raphson, BFGS, etc. but GN and LM are the most common for IK. because they leverage the structure of the problem (least-squares) and are relatively efficient.</p>
+</blockquote>
+</blockquote>
+<h2 id="9-geometric-jacobian">9. Geometric Jacobian</h2>
+<p>We previously discussed computing the Jacobian using an analytic approach (taking direct partial derivatives). However, as a manipulator's Degrees of Freedom (DOF) increase, the analytic equations become massive and computationally intractable.</p>
+<p>To solve this, the industrial standard is to compute the Geometric Jacobian. Instead of deriving complex calculus, this method builds the <span class="arithmatex">\(6 \times n\)</span> Jacobian matrix column by column using data we already calculated during Forward Kinematics.</p>
+<p>For an <span class="arithmatex">\(n\)</span>-DOF manipulator, the Jacobian is constructed as:
+$$
+J = \begin{bmatrix} J_1 &amp; J_2 &amp; \dots &amp; J_n \end{bmatrix}
+$$
+For the <span class="arithmatex">\(i\)</span>-th joint, the column <span class="arithmatex">\(J_i\)</span> is a <span class="arithmatex">\(6 \times 1\)</span> vector composed of a linear velocity part (<span class="arithmatex">\(J_{v_i}\)</span>) and a rotational (angular) velocity part (<span class="arithmatex">\(J_{\omega_i}\)</span>):
+$$
+J_i = \begin{bmatrix} J_{v_i} \ J_{\omega_i} \end{bmatrix}
+$$
+Depending on whether joint <span class="arithmatex">\(i\)</span> is prismatic (sliding) or revolute (rotating), we construct its column using the formulas in the following table:
+$<span class="arithmatex">\(\begin{array}{c|c|c}
+&amp; \textbf{Prismatic} &amp; \textbf{Revolute} \\
+\hline
+\textbf{Linear } (J_{v_i}) &amp; R_{i-1}^0 \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} &amp; R_{i-1}^0 \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \times (d_n^0 - d_{i-1}^0) \\[18pt]
+\hline
+\textbf{Rotational } (J_{\omega_i}) &amp; \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} &amp; R_{i-1}^0 \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}
+\end{array}\)</span>$</p>
+<h3 id="91-understanding-the-matrix-notation">9.1 Understanding the Matrix Notation</h3>
+<p>The elegance of this method is that every variable in the table can be extracted directly from your existing homogeneous transformation matrices (<span class="arithmatex">\(T_{i-1}^0\)</span>). You do not need to calculate anything new; you just pull the right vectors.</p>
+<p>Here is exactly what each term means and how to extract it:</p>
+<ul>
+<li><span class="arithmatex">\(R_{i-1}^0 \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}\)</span> (The Axis of Motion): In the Denavit-Hartenberg (D-H) convention, all joints translate or rotate along their local Z-axis. Multiplying the rotation matrix <span class="arithmatex">\(R_{i-1}^0\)</span> by <span class="arithmatex">\(\begin{bmatrix} 0 &amp; 0 &amp; 1 \end{bmatrix}^T\)</span> is simply a mathematical way of extracting the third column of the rotation matrix. This gives you the 3D vector representing the joint's Z-axis relative to the base frame.</li>
+<li><span class="arithmatex">\(d_{i-1}^0\)</span> (The Joint Position): This is the 3D position <span class="arithmatex">\((x, y, z)\)</span> of joint <span class="arithmatex">\(i\)</span>. You extract this by taking the first three rows of the last column (the translation vector) of the transformation matrix <span class="arithmatex">\(T_{i-1}^0\)</span>.</li>
+<li><span class="arithmatex">\(d_n^0\)</span> (The End-Effector Position): This is the 3D position of the final end-effector. You extract this from the translation vector of your final, complete Forward Kinematics matrix <span class="arithmatex">\(T_n^0\)</span>.</li>
+</ul>
+<h3 id="92-interpretation-of-the-geometric-jacobian">9.2 Interpretation of the Geometric Jacobian</h3>
+<p>If we substitute these matrix terms into simpler variables—calling the Z-axis vector <span class="arithmatex">\(z_{i-1}\)</span> and the positions <span class="arithmatex">\(p_{i-1}\)</span> and <span class="arithmatex">\(p_n\)</span>—the physical meaning of the math becomes very clear:</p>
+<p><strong>For a Prismatic Joint:</strong></p>
+<ul>
+<li>Linear: The joint slides along its Z-axis (<span class="arithmatex">\(z_{i-1}\)</span>), so the linear velocity is exactly that vector.</li>
+<li>Rotational: A sliding joint produces zero rotation, so it is a zero vector <span class="arithmatex">\(\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}\)</span>.</li>
+</ul>
+<p><strong>For a Revolute Joint:</strong></p>
+<ul>
+<li>Linear: Rotation causes the end-effector to swing in an arc. The linear velocity is the cross product of the axis of rotation (<span class="arithmatex">\(z_{i-1}\)</span>) and the vector pointing from the joint to the end-effector <span class="arithmatex">\((p_n - p_{i-1})\)</span>.</li>
+<li>Rotational: The joint rotates exactly around its Z-axis (<span class="arithmatex">\(z_{i-1}\)</span>), so the rotational velocity is that vector.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.tooltips", "toc.integrate", "navigation.sections"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+      
+    
+  </body>
+</html>
