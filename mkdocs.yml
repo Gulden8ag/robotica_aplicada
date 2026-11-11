@@ -1,4 +1,55 @@
 site_name: Applied Robotics (12224)
+nav:
+- Course: index.md
+- Course Overview:
+  - Syllabus: Course_Overview/T0_1.md
+  - 31-session schedule: Course_Overview/schedule.md
+  - Project roadmap: Course_Overview/roadmap.md
+  - Lab Log guide: Course_Overview/T0_2.md
+  - Resources and preparation: Course_Overview/T0_3.md
+- Existing Teaching Material:
+  - M0 - Fundamentals and ROS 2:
+    - Robot taxonomy: M0_Fundamentals_and_Tools/T0_3.md
+    - Degrees of freedom: M0_Fundamentals_and_Tools/T0_4.md
+    - Configuration space and workspace: M0_Fundamentals_and_Tools/T0_6.md
+    - Constraints: M0_Fundamentals_and_Tools/T0_7.md
+    - Installation and setup: M0_Fundamentals_and_Tools/T0_8.md
+    - ROS 2 concepts: M0_Fundamentals_and_Tools/T0_9.md
+    - ROS 2 tools: M0_Fundamentals_and_Tools/T1_0.md
+    - Python nodes and topics: M0_Fundamentals_and_Tools/T1_1.md
+    - Service servers: M0_Fundamentals_and_Tools/T1_2.md
+    - Service clients: M0_Fundamentals_and_Tools/T1_3.md
+    - Custom messages: M0_Fundamentals_and_Tools/T1_4.md
+    - Custom services: M0_Fundamentals_and_Tools/T1_5.md
+    - Parameters: M0_Fundamentals_and_Tools/T1_6.md
+    - Launch files: M0_Fundamentals_and_Tools/T1_7.md
+  - M1 - Manipulator Kinematics:
+    - Frames and transformations: M1_Manipulator_Kinematics/T0_0.md
+    - Forward kinematics and DH: M1_Manipulator_Kinematics/T0_1.md
+    - Inverse kinematics: M1_Manipulator_Kinematics/T0_2.md
+    - Numerical IK from DH: M1_Manipulator_Kinematics/T0_3.md
+    - Jacobians and singularities: M2_Dynamics_and_Control/T0_1.md
+    - RViz and TF: M1_Manipulator_Kinematics/T1_1.md
+    - URDF basics: M1_Manipulator_Kinematics/T1_2.md
+    - URDF joints: M1_Manipulator_Kinematics/T1_3.md
+  - Manipulator Simulation References:
+    - Gazebo and ros2_control: M2_Dynamics_and_Control/T0_2.md
+    - Gazebo IK server: M2_Dynamics_and_Control/T0_3.md
+  - M3 - Trajectory Planning:
+    - Motion profiles: M3_Trajectory_planning/T0_1.md
+    - Cartesian trajectory theory: M3_Trajectory_planning/T0_2.md
+    - Starter workspace and plotting: M3_Trajectory_planning/T0_3.md
+    - Joint-space implementation: M3_Trajectory_planning/T0_4.md
+    - Cartesian implementation: M3_Trajectory_planning/T0_5.md
+    - Multi-pose homework: M3_Trajectory_planning/T0_6.md
+  - Mobile Robotics and Navigation:
+    - Mobile kinematics: M4_Mobile_Fundamentals/T0_1.md
+    - Nav2 simulation reference: M4_Mobile_Fundamentals/T0_2.md
+    - Custom simulation reference: M4_Mobile_Fundamentals/T0_3.md
+    - SLAM and navigation reference: M4_Mobile_Fundamentals/T0_4.md
+  - Existing Project Placeholders:
+    - Manipulator project: M6_Integration_and_validation/T6_1.md
+    - Mobile project: M6_Integration_and_validation/T6_2.md
 markdown_extensions:
   - abbr
   - admonition

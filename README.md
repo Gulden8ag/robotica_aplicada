@@ -1,140 +1,66 @@
-# Plantilla de Documentación con MkDocs + Material
+# Applied Robotics (12224)
 
-Formato de página web para documentar **proyectos** y **actividades de clase** usando **Markdown**.  
-Esta plantilla genera un sitio con **MkDocs** y el tema **Material**.
+Course website for Robótica Aplicada at IBERO Puebla, maintained with MkDocs and the Material theme.
 
----
+## Repository structure
 
-## Qué van a lograr
-- Ver la documentación **en su computadora** (servidor local con autorecarga).
-- Editar archivos Markdown en `docs/`.
-- Publicar el sitio **automáticamente** en GitHub Pages al hacer push (si usan GitHub con esta plantilla).
+| Path | Purpose |
+|---|---|
+| `docs/index.md` | Student starting point |
+| `docs/Course_Overview/` | Syllabus, session schedule, project roadmap, Lab Log guide, resources |
+| `docs/M0_Fundamentals_and_Tools/` | Robotics fundamentals and ROS 2 tutorials |
+| `docs/M1_Manipulator_Kinematics/` | Manipulator kinematics and robot descriptions |
+| `docs/M2_Dynamics_and_Control/` | Existing Jacobian and simulation integration material |
+| `docs/M3_Trajectory_planning/` | Trajectory theory, exercises, and implementation tutorials |
+| `docs/M4_Mobile_Fundamentals/` | Mobile kinematics, simulation, SLAM, and navigation |
+| `docs/M6_Integration_and_validation/` | Existing project placeholders |
+| `docs/css/` | Site styling |
+| `mkdocs.yml` | Navigation and site configuration |
+| `requirements.txt` | Site dependencies |
+| `.github/workflows/ci.yml` | GitHub Pages deployment workflow |
 
----
+Navigation labels describe teaching topics; existing file paths are retained to preserve links. The current folders do not yet contain every lesson in the revised syllabus. The course overview distinguishes the teaching schedule from available reference material.
 
-## Requisitos (instalar primero)
+## Local preview
 
-### 1) Instalar **Python 3.10+**
-- **Windows/macOS/Linux:** descargar desde https://www.python.org/downloads/
-- En **Windows**, marcar la casilla **“Add Python to PATH”** durante la instalación.
+From the repository root, create an environment and install the site dependencies:
 
-Para comprobar desde terminal:
-```bash
-python --version
-# o según tu sistema
-python3 --version
+```powershell
+# Windows PowerShell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m mkdocs serve
 ```
 
-### 2) Instalar Git
-
-- Descargar desde https://git-scm.com/downloads (Windows/macOS/Linux).
-
-Para comprobar desde terminal:
 ```bash
-git --version
-```
-
-Instalar: Visual Studio Code https://code.visualstudio.com/
-
-### 3) Crear tu repositorio desde esta plantilla
-
-1. Abre Visual Studio Code.
-2. En la barra de menú, selecciona "Terminal"-> "Nuevo Terminal". Aparecerá una nueva pestaña de terminal en la parte inferior.
-3. En un navegador de internet abre esta plantilla en GitHub y haz clic en Use this template → Create a new repository.
-4. Ponle nombre a tu repo (por ejemplo, mi-docs) y crea el repositorio.
-5. En tu computadora regresa a la terminal de Visual Studio Code, y elige en que carpeta clonar tu nuevo repo, usando los comandos `cd` por ejemplo:
-```bash
-cd ruta/a/tu/carpeta
-```
-6. Clona tu repositorio con el comando siguiente, reemplazando `<tu-usuario>` y `<tu-repo>` con el encontrado en la pagina, cuando le das click a "Code"->"https" y copias la ruta
-
-```bash
-git clone https://github.com/<tu-usuario>/<tu-repo>.git
-cd <tu-repo>
-```
-
-!!! Importante: No olvides configurar tu nombre de usuario y correo electrónico en Git. Esto es necesario para que tus commits se registren correctamente.
-
-```bash
-git config --global user.name "Tu Nombre"
-git config --global user.email "tu.email@example.com"
-```
-
-### 4) Instalar dependencias (una sola vez por repo)
-
-Recomendado: usar entorno virtual para aislar paquetes. (OPCIONAL)
-
-WINDOWS
-
-```bash
-pip install mkdocs-material
-```
-
-macOS / Linux
-
-```bash
+# Linux / macOS
 python3 -m venv .venv
-source .venv/bin/activate
-pip install mkdocs-material
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m mkdocs serve
 ```
 
-### 5) Ejecutar sitio
+Open the local URL printed by MkDocs. Start the student walkthrough at **Course**, then follow **Course Overview** in menu order.
 
-Desde la carpeta del repo en la terminal:
+To build a local copy, replace `serve` with `build`. Build output goes into the ignored `site/` directory. Review warnings as well as errors; unchanged teaching material has outstanding audit findings.
 
-```bash
-mkdocs serve
-```
+## Revision and review workflow
 
-Abre el navegador en http://127.0.0.1:8000/
-Cada cambio que hagas en archivos dentro de `docs/` se verá al instante cuando guardes(autorecarga).
+Course revisions are reviewed in bounded phases on `course-revision`.
 
----
+1. Agree on the files and content included in the phase.
+2. Make small, logically grouped commits that can be reviewed or reverted independently.
+3. Check links, build the site, and review the rendered pages.
+4. The instructor follows the content as a student and tests the flow.
+5. Address feedback within that phase. Begin another segment only after the instructor explicitly authorizes it.
 
-## FAQS
+Phase 1 covers repository/site organization, the course landing page, and Course Overview. Module lessons, complete project specifications, laboratory authoring, technical corrections in other segments, and deployment require a subsequent explicit instruction.
 
-### ¿Dónde edito?
+Inspect `git status` and the diff before staging. Stage named files for each commit. Push only when explicitly authorized.
 
-Todas las páginas están en la carpeta `docs/`.
-La página inicial es `docs/index.md`.
-Crea más páginas (`.md`) y no uses acentos/espacios en nombres de archivo.
+## Publishing
 
-Controla el menú lateral agregando una sección `nav:` en `mkdocs.yml`.
+The existing workflow deploys to GitHub Pages when commits are pushed to `main` or `master`. Local preview and commits on `course-revision` do not publish the website. Review and approve a release before merging or pushing to a deployment branch.
 
-### Publicación automática
+## Student documentation
 
-Este proyecto incluye un flujo de GitHub Actions que publica el sitio automáticamente al hacer push a la rama principal (o cuando el flujo está configurado para ejecutarse).
-Pasos:
-
-1. Configura el deploy de tu pagina, en tu repositorio de GitHub, entra a la pestaña "Settings" y busca la sección "Pages".
-2. En `source` selecciona Deploy from a branch, y en Branch seleccion `gh-pages` y `/root`
-3. Sube tus Cambios
-```bash
-git add .
-git commit -m "Actualizo documentación"
-git push origin main
-```
-4. Ve a la pestaña Actions de tu repo en GitHub y verifica que el flujo de “build/deploy” se ejecute correctamente.
-5. La página quedará disponible como Project Site en una URL del tipo:
-```php-template
-https://<tu-usuario>.github.io/<tu-repo>/
-```
-
-Si no aparece:
-
-- Revisa Settings → Pages y selecciona GitHub Actions como método de publicación.
-- Asegúrate de que el flujo en .github/workflows/ exista y finalice en “success”.
-
-
---- 
-
-## Estructura Minima de proyecto
-```bash
-.
-├─ docs/
-│  └─ index.md        # tu portada
-├─ mkdocs.yml         # configuración de MkDocs
-├─ requirements.txt   # (opcional) dependencias
-└─ .github/
-   └─ workflows/      # flujo para publicar automáticamente
-```
+Students should use the [Lab Log guide](docs/Course_Overview/T0_2.md) and the separate [Lab Log website template](https://github.com/Gulden8ag/iberoP_Web). This repository contains the course website.
