@@ -1,6 +1,7 @@
 # Detailed sessions
 
-Monday and Wednesday, 17:00-19:00. January 18-May 17, 2027.
+
+**Lectures:** 2 sessions / week, 2 hours / session - Monday and Wednesday, 17:00-19:00. January 18 to May 17, 2027.
 
 No class: February 1; March 15, 22, 24; May 5. Session 30 requires an additional two-hour meeting; its date will be announced in Teams.
 
