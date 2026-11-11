@@ -3,11 +3,12 @@ nav:
 - Course: index.md
 - Course Overview:
   - Syllabus: Course_Overview/T0_1.md
-  - 31-session schedule: Course_Overview/schedule.md
+  - Detailed sessions: Course_Overview/schedule.md
   - Project roadmap: Course_Overview/roadmap.md
+  - Laboratory inventory: Course_Overview/laboratory_inventory.md
   - Lab Log guide: Course_Overview/T0_2.md
-  - Resources and preparation: Course_Overview/T0_3.md
-- Existing Teaching Material:
+  - Resources: Course_Overview/T0_3.md
+- Teaching Material:
   - M0 - Fundamentals and ROS 2:
     - Robot taxonomy: M0_Fundamentals_and_Tools/T0_3.md
     - Degrees of freedom: M0_Fundamentals_and_Tools/T0_4.md
@@ -47,7 +48,7 @@ nav:
     - Nav2 simulation reference: M4_Mobile_Fundamentals/T0_2.md
     - Custom simulation reference: M4_Mobile_Fundamentals/T0_3.md
     - SLAM and navigation reference: M4_Mobile_Fundamentals/T0_4.md
-  - Existing Project Placeholders:
+  - Engineering Projects:
     - Manipulator project: M6_Integration_and_validation/T6_1.md
     - Mobile project: M6_Integration_and_validation/T6_2.md
 markdown_extensions:
